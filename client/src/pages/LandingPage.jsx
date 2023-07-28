@@ -8,7 +8,7 @@ import BeardedDev from "../assets/images/bearded_dev.jpg";
 const LandingPage = () => {
   return (
     <>
-      <div className="landing_page_container wrapper">
+      <div className="landing_page_container">
         <div className="landing_page_inner">
           <div className="landing_page_left">
             <h1>Welcome to Nick's Coding Corner!</h1>

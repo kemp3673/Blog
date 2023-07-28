@@ -46,10 +46,11 @@ const SingleProject = () => {
             <>
               <h2>Screenshots of Project</h2>
               <div className="project_screenshot">
-                {sampleProject.screenshots.map((screenshot) => (
+                {sampleProject.screenshots.map((screenshot, index) => (
                   <img
                     src={screenshot}
                     alt={sampleProject.title}
+                    key={"screenshot" + index}
                     style={{ width: "300px", margin: "10px" }}
                   />
                 ))}
