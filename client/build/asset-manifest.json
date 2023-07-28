@@ -1,0 +1,11 @@
+{
+  "files": {
+    "main.js": "/static/js/main.ec19ec90.js",
+    "static/media/oops.jpeg": "/static/media/oops.02c79aac251c2f62d07d.jpeg",
+    "index.html": "/index.html",
+    "main.ec19ec90.js.map": "/static/js/main.ec19ec90.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.ec19ec90.js"
+  ]
+}
