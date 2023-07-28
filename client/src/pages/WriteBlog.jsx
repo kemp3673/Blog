@@ -10,6 +10,7 @@ const WriteBlog = () => {
   const [uploadedFiles, setUploadedFiles] = useState([]);
 
   console.log(uploadedFiles);
+  console.log(text);
 
   return (
     <div className="writeblog_container">

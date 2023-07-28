@@ -156,7 +156,6 @@ $aboutBG: url("./assets/images/about_background.jpeg");
       padding: 0 20px;
       height: calc(100vh - 60px);
       overflow-y: scroll;
-      justify-content: center;
       .about_inner {
         max-width: 1200px;
 
@@ -234,6 +233,7 @@ $aboutBG: url("./assets/images/about_background.jpeg");
                 padding:0;
                 color: $color3;
                 font-size: 18px;
+
                 li {
                   margin: 2px;
                 }
@@ -730,7 +730,7 @@ $aboutBG: url("./assets/images/about_background.jpeg");
             .project_title_alt {
               font-size: 1.8rem;
               font-weight: 600;
-
+              margin-right: 5px;
             }
             .project_icon {
               margin-top: 10px;
@@ -773,16 +773,16 @@ $aboutBG: url("./assets/images/about_background.jpeg");
     // Project Single
     .single_project_container {
       display: flex;
-      justify-content: center;
+      width: 100vw;
       height: calc(100vh - 60px);
       overflow-y: scroll;
+      justify-content: center;
       .project_inner {
         width: 100vw;
         max-width: 1200px;
         padding: 0 20px;
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
         text-align: center;
         .project_info {

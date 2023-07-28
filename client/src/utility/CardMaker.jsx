@@ -26,7 +26,7 @@ const Card = ({ data }) => {
                   <IconContext.Provider
                     value={{
                       className: "shared-class profile_icon",
-                      size: 30,
+                      size: 40,
                     }}
                   >
                     <LuMousePointerClick className="project_icon" />
