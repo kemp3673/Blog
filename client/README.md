@@ -1,7 +1,20 @@
-# Personal Portfolio and Blog
-![Screenshot 2023-07-25 at 6 55 17 PM](https://github.com/kemp3673/Blog/assets/102747919/669f1f69-444c-4b80-9190-b2406bce803e)
-![Screenshot 2023-07-25 at 6 57 22 PM](https://github.com/kemp3673/Blog/assets/102747919/f0228581-dc29-4be1-b21d-f2b5b4ae6044)
-![Screenshot 2023-07-25 at 6 57 31 PM](https://github.com/kemp3673/Blog/assets/102747919/3d2780c4-df77-44a2-853b-4eaae3f4bf2f)
+<div align="center">
+  <h1>Personal Portfolio and Blog</h1>
+  <br/>
+  <h3> Minimalistic Landing Page</h3>
+  <img src="https://github.com/kemp3673/Blog/assets/102747919/99e4030d-93e9-45a3-a080-123b5c5ef3c4" height="400"/>
+  <h3>Blog Component</h3>
+  <img src="https://github.com/kemp3673/Blog/assets/102747919/333cc473-09f1-4a9a-b3c7-655cac8cdaf7" height="400"/>
+  <h3>Selected Blog Entry</h3>
+  <img src="https://github.com/kemp3673/Blog/assets/102747919/8e3c29f1-e6a8-4251-a546-10bffd67c14d" height="400"/>
+  <h3>Edit/Create Blog Entries</h3>
+  <img src="https://github.com/kemp3673/Blog/assets/102747919/254f50de-0e65-4c25-803d-9d09c781b472" height="400"/>
+  <h3>About Me</h3>
+  <img src="https://github.com/kemp3673/Blog/assets/102747919/6ea85fd1-433e-4302-ad54-a617fea97d7f" height="400"/>
+  <h3>Previous Projects</h3>
+  <img src="https://github.com/kemp3673/Blog/assets/102747919/c3e7bf7a-6935-4bc2-a15a-ef966b64ee8d" height="400"/>
+</div>
+
 
 ## Available Scripts
 
