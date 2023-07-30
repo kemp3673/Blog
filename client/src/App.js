@@ -1,31 +1,32 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 
 // Styles
 import "./style.scss";
-
-// Pages
-import LandingPage from "./pages/LandingPage";
-import ErrorPage from "./pages/ErrorPage";
-import About from "./pages/About";
-import Blogs from "./pages/Blogs";
-import Projects from "./pages/Projects";
-import BlogSingle from "./pages/BlogSingle";
-import WriteProject from "./pages/WriteProject";
-import WriteBlog from "./pages/WriteBlog";
-import Profile from "./pages/Profile";
-import Login from "./pages/Login";
-import PasswordReset from "./pages/PasswordReset";
-import SingleProject from "./pages/SingleProject";
-
 // Components
 import Navbar from "./components/Navbar";
+import Loading from "./components/Loading";
+// Pages
+const LandingPage = React.lazy(() => import("./pages/LandingPage"));
+const ErrorPage = React.lazy(() => import("./pages/ErrorPage"));
+const About = React.lazy(() => import("./pages/About"));
+const Blogs = React.lazy(() => import("./pages/Blogs"));
+const Projects = React.lazy(() => import("./pages/Projects"));
+const BlogSingle = React.lazy(() => import("./pages/BlogSingle"));
+const WriteProject = React.lazy(() => import("./pages/WriteProject"));
+const WriteBlog = React.lazy(() => import("./pages/WriteBlog"));
+const Profile = React.lazy(() => import("./pages/Profile"));
+const Login = React.lazy(() => import("./pages/Login"));
+const PasswordReset = React.lazy(() => import("./pages/PasswordReset"));
+const SingleProject = React.lazy(() => import("./pages/SingleProject"));
 
 const Layout = () => {
   return (
     <>
       <Navbar />
-      <Outlet />
+      <Suspense fallback={<Loading />}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };
@@ -89,7 +90,9 @@ function App() {
   return (
     <div className="app">
       <div className="app_container">
-        <RouterProvider router={router} />
+        <Suspense fallback={<Loading />}>
+          <RouterProvider router={router} />
+        </Suspense>
       </div>
     </div>
   );

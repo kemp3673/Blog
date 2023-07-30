@@ -5,6 +5,8 @@ import {
   PiDatabaseThin,
   PiBrowsersThin,
 } from "react-icons/pi";
+import { BsLinkedin, BsGithub, BsPhone } from "react-icons/bs";
+import { FiMail } from "react-icons/fi";
 
 const About = () => {
   // Set navbarlink to active on component mount
@@ -42,6 +44,28 @@ const About = () => {
             collaborate on the next big thing!
           </p>
         </div>
+        <div className="about_contact">
+          {/* TODO Link Contact Links */}
+          <h1>Contact</h1>
+          <IconContext.Provider
+            value={{
+              className: "shared-class skill_icon",
+              size: 40,
+            }}
+          >
+            <BsLinkedin />
+            <BsGithub />
+            <BsPhone />
+            <a
+              href="mailto:nicholas.kempkes@gmail.com"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FiMail />
+            </a>
+          </IconContext.Provider>
+        </div>
+
         <div className="about_skills">
           <h1>Skills</h1>
           <div className="skills">
@@ -50,7 +74,7 @@ const About = () => {
                 <IconContext.Provider
                   value={{
                     className: "shared-class skill_icon",
-                    size: 50,
+                    size: 40,
                   }}
                 >
                   <PiBrowsersThin />

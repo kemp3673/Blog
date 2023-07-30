@@ -55,6 +55,52 @@ $aboutBG: url("./assets/images/about_background.jpeg");
       min-height: calc(100vh - 60px);
     }
 
+    // Loading Spinner
+    .loading {
+      height: calc(100vh - 60px);
+      width: 100vw;
+      display: flex;
+        justify-content: center;
+        align-items: center;
+
+      .spinner {
+        position: absolute;
+        translate: transform(-50%, -50%);
+      }
+      .spinner-one {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 5px solid $color1;
+        border-bottom: 5px solid transparent;
+        animation: spin 2s linear forwards infinite;
+      }
+      .spinner-two {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 5px solid $color4;
+        border-top: 5px solid transparent;
+        animation: spin 1.5s linear forwards infinite;
+      }
+      .spinner-three {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        border: 5px solid $color3;
+        border-bottom: 5px solid transparent;
+        animation: spin 1s linear forwards infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    }
     // Landing Page
     .landing_page_container {
       display: flex;
@@ -161,6 +207,7 @@ $aboutBG: url("./assets/images/about_background.jpeg");
       overflow-y: scroll;
       .about_inner {
         max-width: 1200px;
+        justify-content: center;
 
         .about_me {
           h1 {
@@ -302,12 +349,12 @@ $aboutBG: url("./assets/images/about_background.jpeg");
         display: flex;
         flex-direction: column;
         margin-top: 50px;
-        gap: 100px;
+        gap: 50px;
         padding: 0 20px;
 
         .post {
           display: flex;
-          gap: 100px;
+          gap: 50px;
           align-items: center;
           position: relative;
           // Change side of image and text if odd index
@@ -448,11 +495,11 @@ $aboutBG: url("./assets/images/about_background.jpeg");
       overflow-y: scroll;
       .blog_single_inner {
         width: 100vw;
-        padding: 0 20px 0 0;
+        padding: 0 20px 0 20px;
         max-width: 1600px;
         display: flex;
         flex-direction: row;
-        gap: 100px;
+        gap: 50px;
         .blog_single_content {
           flex: 6;
           display: flex;
@@ -464,13 +511,11 @@ $aboutBG: url("./assets/images/about_background.jpeg");
             padding: 1px;
           }
           img {
-            padding-left: 10px;
             width: 100%;
             height: 400px;
             object-fit: cover;
           }
           .blog_author {
-            padding-left: 10px;
             display: flex;
             flex-direction: row;
             gap: 10px;
@@ -588,17 +633,38 @@ $aboutBG: url("./assets/images/about_background.jpeg");
         .blog_single_inner {
           flex-direction: column;
           gap: 20px;
+          padding: 0;
           .blog_single_content {
             flex: 1;
+            .blog_single_title {
+              padding: 0 20px 0 20px;
+            }
+            .blog_single_text {
+              padding: 0 20px 0 20px;
+            }
+            .blog_author {
+              padding: 0 20px 0 20px;
+              .blog_author_image {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+              }
+              .blog_author_name {
+                font-size: 12px;
+              }
+              .blog_date_posted {
+                font-size: 12px;
+              }
+            }
           }
           .blog_single_menu {
             flex: 1;
           }
           .blog_menu_title {
-            margin-left: 20px;
+            margin:  0 20px 0 20px;
           }
           .blog_menu_item {
-            padding-left: 20px;
+            padding: 0 20px 0 20px;
           }
         }
       }
@@ -1202,6 +1268,9 @@ $aboutBG: url("./assets/images/about_background.jpeg");
 
           }
         }
+        .navBar_right_mobile {
+          display: none;
+        }
       }
 
       @media screen and (max-width: 1024px) {
@@ -1211,6 +1280,71 @@ $aboutBG: url("./assets/images/about_background.jpeg");
           }
           .navBar_right {
             display: none;
+          }
+          .navBar_right_mobile {
+            display: block;
+            .navBar_right_mobile_overlay {
+              position: fixed;
+              top: 60px;
+              left: 0;
+              width: 100%;
+              height: calc( 100vh - 60px);
+              background-color: rgba(0, 0, 0, 0.5);
+              z-index: 10;
+              z-index: -10;
+              opacity: 0;
+            }
+            .navBar_right_mobile_overlay.active {
+              display: block;
+              z-index: 10;
+              opacity: 1;
+            }
+            .hamburger {
+              width: 30px;
+              height: 25px;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              cursor: pointer;
+              overflow-y: hidden;
+              .line1, .line2, .line3 {
+                width: 100%;
+                height: 3px;
+                background-color: $color5;
+                transition: all 0.2s ease;
+              }
+            }
+              .line1.active{
+                transform: rotate(45deg);
+                transform-origin: left;;
+              }
+              .line2.active{
+                opacity: 0;
+              }
+              .line3.active{
+                transform: rotate(-45deg);
+                transform-origin: left;
+              }
+
+              .navBar_right_mobile_menu {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                right: calc(-50vw - 20px);
+                background-color: $color1;
+                padding: 10px;
+                width: 50vw;
+                height: 100vh;
+                border-radius: 0 0 0 10px;
+                z-index: 100;
+                transition: all 0.2s ease;
+              }
+
+              .navBar_right_mobile_menu.active {
+                transform: translateX(calc(-50vw - 20px));
+              }
           }
         }
       }

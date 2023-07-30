@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { IconContext } from "react-icons";
 
@@ -24,6 +25,8 @@ const showDropdown = () => {
 };
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <>
       <div className="navBar">
@@ -62,6 +65,42 @@ const Navbar = () => {
               <Link to="/login" className="navBar_right_dropdown_item">
                 <h3 onClick={(e) => showDropdown()}>Login</h3>
               </Link>
+            </div>
+          </div>
+          <div className="navBar_right_mobile">
+            <div className="hamburger" onClick={(e) => setIsOpen(!isOpen)}>
+              <span className={`line1 ${isOpen ? "active" : ""}`}></span>
+              <span className={`line2 ${isOpen ? "active" : ""}`}></span>
+              <span className={`line3 ${isOpen ? "active" : ""}`}></span>
+            </div>
+            <div
+              className={`navBar_right_mobile_overlay ${
+                isOpen ? "active" : ""
+              }`}
+              // onClick={(e) => setIsOpen(false)}
+            >
+              <div
+                className={`navBar_right_mobile_menu ${isOpen ? "active" : ""}`}
+              >
+                <Link to="/blog">
+                  <h3 id="blog" onClick={(e) => setIsOpen(false)}>
+                    Blog
+                  </h3>
+                </Link>
+                <Link to="/about">
+                  <h3 id="about" onClick={(e) => setIsOpen(false)}>
+                    About
+                  </h3>
+                </Link>
+                <Link to="/projects">
+                  <h3 id="projects" onClick={(e) => setIsOpen(false)}>
+                    Projects
+                  </h3>
+                </Link>
+                <Link to="/login" className="navBar_right_dropdown_item">
+                  <h3 onClick={(e) => setIsOpen(false)}>Login</h3>
+                </Link>
+              </div>
             </div>
           </div>
         </nav>
