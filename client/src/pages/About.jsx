@@ -20,7 +20,7 @@ const About = () => {
   }, []);
 
   return (
-    <div className="about_container wrapper">
+    <div className="about_container ">
       <div className="about_inner">
         <div className="about_me">
           <h1>About Me</h1>
@@ -53,16 +53,40 @@ const About = () => {
               size: 40,
             }}
           >
-            <BsLinkedin />
-            <BsGithub />
-            <BsPhone />
-            <a
-              href="mailto:nicholas.kempkes@gmail.com"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <FiMail />
-            </a>
+            <ul>
+              <li>
+                <a
+                  href="https://www.linkedin.com/in/nicholas-kempkes/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <BsLinkedin />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/kemp3673"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <BsGithub />
+                </a>
+              </li>
+              <li>
+                <a href="tel:1-218-770-3673">
+                  <BsPhone />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:nicholas.kempkes@gmail.com"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <FiMail />
+                </a>
+              </li>
+            </ul>
           </IconContext.Provider>
         </div>
 

@@ -22,7 +22,7 @@ const LandingPage = () => {
             </h3>
             <div className="lp_buttons_wrapper">
               <button className="lp_button_1">Download Resume</button>
-              <Link to="/blog">
+              <Link to="/about">
                 <button className="lp_button_2">
                   Learn More&nbsp;
                   <FaArrowRight />{" "}

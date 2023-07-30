@@ -4,6 +4,8 @@ import { IconContext } from "react-icons";
 
 // Icons
 import { BsFillPersonFill } from "react-icons/bs";
+import { BsPhone } from "react-icons/bs";
+import { FiMail } from "react-icons/fi";
 
 const showDropdown = () => {
   // Toggle dropdown
@@ -35,13 +37,30 @@ const Navbar = () => {
             <Link to="/">
               <h1>NK</h1>
             </Link>
+            <div className="navBar_Contact">
+              <IconContext.Provider
+                value={{
+                  className: "shared-class skill_icon",
+                  size: 20,
+                }}
+              >
+                <ul>
+                  <li>
+                    <BsPhone /> +1 (218) 770-3673
+                  </li>
+                  <li>
+                    <FiMail /> nicholas.kempkes@gmail.com
+                  </li>
+                </ul>
+              </IconContext.Provider>
+            </div>
           </div>
           <div className="navBar_center">
-            <Link to="/blog">
-              <h3 id="blog">Blog</h3>
-            </Link>
             <Link to="/about">
               <h3 id="about">About</h3>
+            </Link>
+            <Link to="/blog">
+              <h3 id="blog">Blog</h3>
             </Link>
             <Link to="/projects">
               <h3 id="projects">Projects</h3>
@@ -82,14 +101,14 @@ const Navbar = () => {
               <div
                 className={`navBar_right_mobile_menu ${isOpen ? "active" : ""}`}
               >
-                <Link to="/blog">
-                  <h3 id="blog" onClick={(e) => setIsOpen(false)}>
-                    Blog
-                  </h3>
-                </Link>
                 <Link to="/about">
                   <h3 id="about" onClick={(e) => setIsOpen(false)}>
                     About
+                  </h3>
+                </Link>
+                <Link to="/blog">
+                  <h3 id="blog" onClick={(e) => setIsOpen(false)}>
+                    Blog
                   </h3>
                 </Link>
                 <Link to="/projects">
@@ -97,9 +116,26 @@ const Navbar = () => {
                     Projects
                   </h3>
                 </Link>
-                <Link to="/login" className="navBar_right_dropdown_item">
+                <Link to="/login">
                   <h3 onClick={(e) => setIsOpen(false)}>Login</h3>
                 </Link>
+                <div className="mobile_contact">
+                  <IconContext.Provider
+                    value={{
+                      className: "shared-class skill_icon",
+                      size: 20,
+                    }}
+                  >
+                    <ul>
+                      <li>
+                        <BsPhone /> +1 (218) 770-3673
+                      </li>
+                      <li>
+                        <FiMail /> nicholas.kempkes@gmail.com
+                      </li>
+                    </ul>
+                  </IconContext.Provider>
+                </div>
               </div>
             </div>
           </div>
