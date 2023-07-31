@@ -8,6 +8,7 @@ const app = express();
 const blogRoutes = require("./routes/blogRoutes");
 const projectRoutes = require("./routes/projectRoutes");
 const userRoutes = require("./routes/userRoutes");
+const resumeRoutes = require("./routes/resumeRoutes");
 
 // ***** MIDDLWARE *****
 app.use(
@@ -33,6 +34,7 @@ app.use(express.static(buildPath));
 app.use("/api/blogs", blogRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/user", userRoutes);
+app.use("/resume", resumeRoutes);
 
 // Serve up resume
 app.get("/resume", (req, res) => {

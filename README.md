@@ -71,3 +71,9 @@ sudo systemctl enable mysql
 ```sh
 mysql -u root -p
 ```
+
+6. Run Schema.sql to create database and tables
+
+```sh
+mysql -u root -p < schema.sql
+```
