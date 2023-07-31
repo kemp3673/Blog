@@ -11,20 +11,30 @@ const WriteProject = () => {
   const [skillInput, setSkillInput] = useState("");
   const [text, setText] = useState("");
   const [uploadedFiles, setUploadedFiles] = useState([]);
+  const [screenshotFile, setScreenshotFile] = useState([]);
 
   const handleSkillEntry = (e) => {
     e.preventDefault();
     const newSkill = skillInput.trim();
 
     if (newSkill === "") return;
-    if (skills.includes(newSkill)) return;
-
+    if (skills.includes(newSkill)) {
+      setSkillInput("");
+      return;
+    }
     setSkills([...skills, newSkill]);
     setSkillInput("");
   };
 
   const handleSkillInputChange = (e) => {
     setSkillInput(e.target.value);
+  };
+
+  const screenShotHandler = (e) => {
+    const files = e.target.files;
+    // Convert the FileList object to an array and store it in the state
+    const filesArray = Array.from(files);
+    setScreenshotFile(...screenshotFile, filesArray);
   };
 
   console.log(uploadedFiles);
@@ -69,6 +79,56 @@ const WriteProject = () => {
             <label className="file_upload" htmlFor="file">
               Upload Image
             </label>
+            {uploadedFiles.length > 0 && (
+              <div className="main_image_upload">
+                <span>{uploadedFiles[0].name}</span>
+                <IconContext.Provider
+                  value={{
+                    className: "shared-class edit_icon",
+                    color: "red",
+                    size: 20,
+                  }}
+                >
+                  <AiFillDelete
+                    className="writeblog_delete"
+                    onClick={() => setUploadedFiles([])}
+                  />
+                </IconContext.Provider>
+              </div>
+            )}
+            <input
+              type="file"
+              id="screenshots"
+              style={{ display: "none" }}
+              multiple
+              onChange={(e) => screenShotHandler(e)}
+            />
+            <label className="file_upload" htmlFor="screenshots">
+              Upload Screenshots
+            </label>
+            <div className="screenshot_files">
+              {screenshotFile.map((file) => (
+                <div className="screenshot_file">
+                  <span>{file.name}</span>
+                  <IconContext.Provider
+                    value={{
+                      className: "shared-class edit_icon",
+                      color: "red",
+                      size: 20,
+                    }}
+                  >
+                    <AiFillDelete
+                      className="writeblog_delete"
+                      onClick={() =>
+                        setScreenshotFile(
+                          screenshotFile.filter((f) => f !== file)
+                        )
+                      }
+                    />
+                  </IconContext.Provider>
+                </div>
+              ))}
+            </div>
             <div className="write_buttons">
               <button className="write_button">Save as Draft</button>
               <button className="write_button">Update</button>
