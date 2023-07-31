@@ -171,22 +171,29 @@ const Blogs = () => {
 
   return (
     <div className="posts_container wrapper">
-      <div className="posts">
-        {exampleBlogs.map((blog) => (
-          <div className="post" key={blog.id}>
-            <div className="post_image">
-              <img src={blog.image} alt={blog.title} />
+      {exampleBlogs.length > 0 ? (
+        <div className="posts">
+          {exampleBlogs.map((blog) => (
+            <div className="post" key={blog.id}>
+              <div className="post_image">
+                <img src={blog.image} alt={blog.title} />
+              </div>
+              <div className="post_content">
+                <h1 className="post_title">{blog.title}</h1>
+                <p className="post_description">{blog.summary}</p>
+                <Link className="post_link" to={`/blog/${blog.id}`}>
+                  <button className="post_button">Read More</button>
+                </Link>
+              </div>
             </div>
-            <div className="post_content">
-              <h1 className="post_title">{blog.title}</h1>
-              <p className="post_description">{blog.summary}</p>
-              <Link className="post_link" to={`/blog/${blog.id}`}>
-                <button className="post_button">Read More</button>
-              </Link>
-            </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <div className="no_posts">
+          <h1>No Posts Found</h1>
+          <p>Check back later for more posts!</p>
+        </div>
+      )}
     </div>
   );
 };

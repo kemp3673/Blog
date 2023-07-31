@@ -49,7 +49,13 @@ const Navbar = () => {
                     <BsPhone /> +1 (218) 770-3673
                   </li>
                   <li>
-                    <FiMail /> nicholas.kempkes@gmail.com
+                    <a
+                      href="mailto:nicholas.kempkes@gmail.com"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <FiMail /> nicholas.kempkes@gmail.com
+                    </a>
                   </li>
                 </ul>
               </IconContext.Provider>

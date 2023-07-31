@@ -89,11 +89,17 @@ const Projects = () => {
 
   return (
     <div className="projects_container">
-      <div className="projects_inner">
-        {exampleProjectData.map((project) => (
-          <Card data={project} key={project.id + "card"} />
-        ))}
-      </div>
+      {exampleProjectData.length > 0 ? (
+        <div className="projects_inner">
+          {exampleProjectData.map((project) => (
+            <Card data={project} key={project.id + "card"} />
+          ))}
+        </div>
+      ) : (
+        <div className="projects_inner">
+          <h1>Projects Coming Soon!</h1>
+        </div>
+      )}
     </div>
   );
 };

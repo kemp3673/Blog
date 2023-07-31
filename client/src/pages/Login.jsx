@@ -33,11 +33,11 @@ const Login = () => {
             }}
           >
             <AiFillEye
-              className="show_password_icon"
+              className="hide_password_icon"
               onClick={() => togglePasswordVisibility()}
             />
             <AiFillEyeInvisible
-              className="hide_password_icon"
+              className="show_password_icon"
               onClick={() => togglePasswordVisibility()}
             />
           </IconContext.Provider>
