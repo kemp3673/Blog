@@ -34,7 +34,7 @@ const WriteProject = () => {
     const files = e.target.files;
     // Convert the FileList object to an array and store it in the state
     const filesArray = Array.from(files);
-    setScreenshotFile(...screenshotFile, filesArray);
+    setScreenshotFile([...screenshotFile].concat(filesArray));
   };
 
   console.log(uploadedFiles);
@@ -108,7 +108,7 @@ const WriteProject = () => {
             </label>
             <div className="screenshot_files">
               {screenshotFile.map((file) => (
-                <div className="screenshot_file">
+                <div className="screenshot_file" key={file.name}>
                   <span>{file.name}</span>
                   <IconContext.Provider
                     value={{

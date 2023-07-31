@@ -1,4 +1,4 @@
-// Components
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   return (
@@ -10,6 +10,12 @@ const Profile = () => {
         style={{ height: "50px", borderRadius: "10px" }}
         alt="profile"
       />
+      <Link to="/projects/write">
+        <button className="btn btn-primary">Add Project Entry</button>
+      </Link>
+      <Link to="/blog/write">
+        <button className="btn btn-primary">Add Blog Entry</button>
+      </Link>
     </div>
   );
 };

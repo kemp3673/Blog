@@ -62,7 +62,7 @@ const router = createBrowserRouter([
         element: <SingleProject />,
       },
       {
-        path: "projects/create",
+        path: "projects/write",
         element: <WriteProject />,
       },
       {

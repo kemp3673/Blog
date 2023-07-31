@@ -42,7 +42,9 @@ const Login = () => {
             />
           </IconContext.Provider>
         </div>
-        <button type="submit">Login</button>
+        <Link to="/profile/kempkes">
+          <button type="submit">Login</button>
+        </Link>
       </form>
       {/* TODO Tie in error message */}
       <p className="error_msg">Something went wrong. Try again.</p>

@@ -1,4 +1,7 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { IconContext } from "react-icons";
+import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 
 const sampleProject = {
   id: 2,
@@ -40,6 +43,28 @@ const SingleProject = () => {
               </a>
             </button>
           ) : null}
+        </div>
+        <div className="edit_project">
+          <Link to={`/projects/write?edit=${sampleProject.id}`}>
+            <IconContext.Provider
+              value={{
+                className: "shared-class edit_icon",
+                color: "black",
+                size: 30,
+              }}
+            >
+              <AiFillEdit />
+            </IconContext.Provider>
+          </Link>
+          <IconContext.Provider
+            value={{
+              className: "shared-class edit_icon",
+              color: "red",
+              size: 30,
+            }}
+          >
+            <AiFillDelete />
+          </IconContext.Provider>
         </div>
         <div className="project_screenshots">
           {sampleProject.screenshots ? (
