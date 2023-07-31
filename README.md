@@ -15,7 +15,6 @@
   <img src="https://github.com/kemp3673/Blog/assets/102747919/c3e7bf7a-6935-4bc2-a15a-ef966b64ee8d" height="400"/>
 </div>
 
-
 ## Available Scripts
 
 In the project directory, you can run:
@@ -38,3 +37,37 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+### Mysql
+
+#### AWS EC2
+
+1. Install MySQL Server:
+
+```sh
+sudo apt update
+sudo apt install mysql-server
+```
+
+2. Start MySQL Service:
+
+```sh
+sudo systemctl start mysql
+```
+
+3. Secure MySQL Installation: Perform some initial security configurations
+
+```sh
+sudo mysql_secure_installation
+```
+
+4. Configure MySQL to Start on Boot:
+
+```sh
+sudo systemctl enable mysql
+```
+
+5. Access MySQL:
+
+```sh
+mysql -u root -p
+```

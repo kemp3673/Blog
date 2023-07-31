@@ -50,7 +50,7 @@ const About = () => {
           <IconContext.Provider
             value={{
               className: "shared-class skill_icon",
-              size: 40,
+              size: 30,
             }}
           >
             <ul>

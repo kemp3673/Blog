@@ -178,7 +178,7 @@ $aboutBG: url("./assets/images/about_background.jpeg");
     .about_container {
       padding: 0 20px;
       height: calc(100vh - 60px);
-      overflow-y: scroll;
+      overflow-y: auto;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -191,32 +191,35 @@ $aboutBG: url("./assets/images/about_background.jpeg");
 
         .about_me {
           h1 {
-            margin-bottom: 20px;
+            margin: 10px;
             color: $color1;
             font-size: 2rem;
           }
 
           p {
             color: $color1;
-            font-size: 1.2rem;
+            font-size: 1rem;
             text-align: center;
           }
         }
         .about_contact {
+          h1 {
+            margin: 10px;
+          }
           ul {
             display: flex;
             flex-direction: row;
             justify-content: center;
             align-items: center;
-            gap: 20px;
+            gap: 10px;
             padding: 0;
-            margin-top: 20px;
+            margin-top: 10px;
             li {
               list-style: none;
               a {
                 text-decoration: none;
                 color: $color1;
-                font-size: 1.5rem;
+                font-size: 1rem;
                 transition: all 0.2s ease-in-out;
                 &:hover {
                   color: $color2;
@@ -226,8 +229,9 @@ $aboutBG: url("./assets/images/about_background.jpeg");
           }
         }
         .about_skills {
-          padding-bottom: 20px;
+          padding-bottom: 10px;
           h1 {
+            margin: 10px;
             color: $color1;
             font-size: 2rem;
           }
@@ -250,7 +254,7 @@ $aboutBG: url("./assets/images/about_background.jpeg");
               background-color: whitesmoke;
               .skill_title {
                 position: absolute;
-                font-size: 1.2rem;
+                font-size: 1.1rem;
                 color: $color2;
                 top: -50px;
                 .skill_icon {
@@ -287,7 +291,7 @@ $aboutBG: url("./assets/images/about_background.jpeg");
                 margin: 0;
                 padding:0;
                 color: $color3;
-                font-size: 18px;
+                font-size: 1rem;
 
                 li {
                   text-align: center;
@@ -347,7 +351,7 @@ $aboutBG: url("./assets/images/about_background.jpeg");
     // Blogs
     .posts_container {
       height: calc(100vh - 60px);
-      overflow-y: scroll;
+      overflow-y: auto;
       .posts {
         max-width: 1200px;
         display: flex;
@@ -496,7 +500,7 @@ $aboutBG: url("./assets/images/about_background.jpeg");
       display: flex;
       justify-content: center;
       height: calc(100vh - 60px);
-      overflow-y: scroll;
+      overflow-y: auto;
       .blog_single_inner {
         width: 100vw;
         padding: 0 20px 0 20px;
@@ -680,7 +684,7 @@ $aboutBG: url("./assets/images/about_background.jpeg");
       display: flex;
       justify-content: center;
       height: calc(100vh - 60px);
-      overflow-y: scroll;
+      overflow-y: auto;
       .writeblog_inner {
         padding: 0 20px;
         width: 100vw;
@@ -737,7 +741,7 @@ $aboutBG: url("./assets/images/about_background.jpeg");
               .ql-container {
                 position: relative;
                 height: fit-content;
-                overflow: scroll;
+                overflow: auto;
                 padding: 0;
 
                 margin: 0;
@@ -745,7 +749,7 @@ $aboutBG: url("./assets/images/about_background.jpeg");
                 .ql-editor {
                   // resize: vertical;
                   position: relative;
-                  overflow: scroll;
+                  overflow: auto;
                   height: 55vh;
                   min-height: fit-content;
                   padding: 0;
@@ -798,7 +802,7 @@ $aboutBG: url("./assets/images/about_background.jpeg");
               flex-direction: column;
               height: fit-content;
               max-height: 100px;
-              overflow-y: scroll;
+              overflow-y: auto;
               border: 1px solid lightgray;
               padding: 10px;
               gap: 5px;
@@ -949,7 +953,7 @@ $aboutBG: url("./assets/images/about_background.jpeg");
       gap: 1rem;
       text-decoration: none;
       height: calc(100vh - 60px);
-      overflow-y: scroll;
+      overflow-y: auto;
       a {
         text-decoration: none;
       }
@@ -1052,7 +1056,7 @@ $aboutBG: url("./assets/images/about_background.jpeg");
       display: flex;
       width: 100vw;
       height: calc(100vh - 60px);
-      overflow-y: scroll;
+      overflow-y: auto;
       justify-content: center;
       .project_inner {
         width: 100vw;
@@ -1138,6 +1142,52 @@ $aboutBG: url("./assets/images/about_background.jpeg");
         }
       }
     }
+
+    // Profile
+    .profile_container {
+      display: flex;
+      width: 100vw;
+      height: calc(100vh - 60px);
+      overflow-y: auto;
+      justify-content: center;
+      align-items: center;
+      .profile_inner {
+        display: flex;
+        width: 100%;
+        max-width: 1200px;
+        padding: 0 20px;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        .profile_image{
+          height: 200px;
+          width: 200px;
+          border-radius: 50%;
+          overflow: hidden;
+          img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+          }
+        }
+        .profile_info {
+
+        }
+        .account_posts {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 20px;
+          .account_post {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+          }
+        }
+      }
+    }
+
     // Login
     .auth {
       justify-content: center;
