@@ -1,9 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
+import FileDownload from "js-file-download";
+import axios from "axios";
 
 // Image
 import BeardedDev from "../assets/images/bearded_dev.jpg";
+
+const getResume = async () => {
+  return await axios
+    .get("/resume", {
+      responseType: "blob",
+    })
+    .then((res) => {
+      FileDownload(res.data, "Nick's Resume.pdf");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 const LandingPage = () => {
   return (
@@ -21,7 +36,9 @@ const LandingPage = () => {
               the world of software development. Happy coding!
             </h3>
             <div className="lp_buttons_wrapper">
-              <button className="lp_button_1">Download Resume</button>
+              <button className="lp_button_1" onClick={getResume}>
+                Download Resume
+              </button>
               <Link to="/about">
                 <button className="lp_button_2">
                   Learn More&nbsp;

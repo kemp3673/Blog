@@ -4,6 +4,10 @@ const compression = require("compression");
 const cors = require("cors");
 const path = require("path");
 const app = express();
+// Import routes
+const blogRoutes = require("./routes/blogRoutes");
+const projectRoutes = require("./routes/projectRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 // ***** MIDDLWARE *****
 app.use(
@@ -20,12 +24,27 @@ app.use(cors());
 // Tell express to use json
 app.use(express.json());
 
-// ***** ROUTES *****
-
 // Serve up html file
 
 const buildPath = path.join(__dirname, "../client/build");
 app.use(express.static(buildPath));
+
+// ***** ROUTES *****
+app.use("/api/blogs", blogRoutes);
+app.use("/api/projects", projectRoutes);
+app.use("/api/user", userRoutes);
+
+// Serve up resume
+app.get("/resume", (req, res) => {
+  try {
+    res.download("./static/resume.pdf");
+  } catch (error) {
+    throw {
+      status: 500,
+      message: "There was a problem retrieving the pdf file",
+    };
+  }
+});
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(buildPath, "index.html"));
