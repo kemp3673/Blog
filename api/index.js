@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const bodyParser = require("body-parser");
 const compression = require("compression");
 const cors = require("cors");
 const path = require("path");
@@ -18,6 +19,9 @@ app.use(
   })
 );
 app.use(compression());
+// Use body-parser middleware to parse request bodies
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 // Tell express to use cors
 app.use(cors());

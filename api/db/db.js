@@ -1,21 +1,17 @@
-import mysql from "mysql";
-import dotenv from "dotenv";
+require("dotenv").config();
+const mysql = require("mysql");
 
 // Load env variables
-dotenv.config();
-const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
+const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT } = process.env;
 
-const db = mysql.createConnection({
+const db = mysql.createPool({
   host: DB_HOST,
   user: DB_USER,
   password: DB_PASSWORD,
   database: DB_NAME,
+  port: DB_PORT,
 });
 
-db.connect()
-  .then(() => {
-    console.log("\x1b[33m%s\x1b[0m", "CONNECTED TO DATABASE");
-  })
-  .catch((err) => {
-    console.log(err.message);
-  });
+console.log("\x1b[33m%s\x1b[0m", "CONNECTED TO DATABASE");
+
+module.exports = db;
