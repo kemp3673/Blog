@@ -56,23 +56,35 @@ const getSingleBlog = async (req, res) => {
 const createBlog = async (req, res) => {
   const { title, description, main_image, content, user_id } = req.body;
 
-  const query = `
-    INSERT INTO blogs (title, description, main_image, content, user_id)
-    VALUES (?, ?, ?, ?, ?)
+  const blogQuery = `
+    INSERT INTO blogs (title, description, main_image, user_id)
+    VALUES (?, ?, ?, ?)
+  `;
+
+  const contentQuery = `
+    INSERT INTO blog_content (blog_id, content)
+    VALUES (?, ?)
   `;
 
   try {
-    const results = await executeQuery(query, [
+    // Insert into the 'blogs' table
+    const blogResults = await executeQuery(blogQuery, [
       title,
       description,
       main_image,
-      content,
       user_id,
     ]);
+
+    // Get the newly inserted 'blog_id'
+    const blogId = blogResults.insertId;
+
+    // Insert into the 'blog_content' table using the retrieved 'blog_id'
+    await executeQuery(contentQuery, [blogId, content]);
+
     // Blog entry successfully created
     return res.status(201).json({
       message: "Blog entry created successfully",
-      blogId: results.insertId,
+      blogId: blogId,
     });
   } catch (error) {
     console.error("Error creating blog:", error.message);

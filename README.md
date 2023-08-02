@@ -76,4 +76,8 @@ mysql -u root -p
 
 ```sh
 mysql -u root -p < schema.sql
+
+NOTE: If you run this on a windows machine
+mysql -u root -p --execute="source schema.sql"
+
 ```
