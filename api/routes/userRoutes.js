@@ -1,27 +1,22 @@
+/**** ROUTE PREFIX: /api/user *****/
+
 const express = require("express");
 const router = express.Router();
 
 // Import controllers
 const {
-  userLogin,
-  userLogout,
   getUserInfo,
-  updateUserInfo,
+  login,
+  logout,
 } = require("../controllers/userController.js");
 
-// ***** ROUTES ***** //
-
-/**** USER *****/
-// User login
-router.post("/login", userLogin);
-
-// User log out
-router.post("/logout", userLogout);
-
 // Get user info
-router.get("/:username", getUserInfo);
+router.get("/:id", getUserInfo);
 
-// Update user info
-router.patch("/:username", updateUserInfo);
+// Login user
+router.post("/login", login);
+
+// Logout
+router.post("/logout", logout);
 
 module.exports = router;

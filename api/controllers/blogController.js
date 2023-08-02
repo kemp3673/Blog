@@ -1,17 +1,5 @@
 const db = require("../db/db.js");
-
-// Function to execute a database query and return a Promise
-const executeQuery = (query, values) => {
-  return new Promise((resolve, reject) => {
-    db.query(query, values, (error, results) => {
-      if (error) {
-        reject(error); // Reject the Promise with the error
-      } else {
-        resolve(results); // Resolve the Promise with the query results
-      }
-    });
-  });
-};
+const executeQuery = require("../utility/executeQuery.js");
 
 const getBlogs = async (req, res) => {
   const limit = 10; // Set the number of records to fetch per page
@@ -38,18 +26,32 @@ const getBlogs = async (req, res) => {
 const getSingleBlog = async (req, res) => {
   const blogId = req.params.id;
   const query = `
-    SELECT * FROM blogs WHERE id = ?;
+  SELECT
+  bc.content,
+  b.title,
+  b.main_image,
+  b.created_at,
+  b.updated_at,
+  u.name AS author_name,
+  u.img AS author_img
+FROM
+  blogs b
+INNER JOIN
+  blog_content bc ON b.id = bc.blog_id
+INNER JOIN
+  users u ON b.user_id = u.id
+WHERE
+  b.id = ?;
   `;
-
   try {
     const results = await executeQuery(query, [blogId]);
     // Blog entry successfully created
     return res.status(200).json(results);
   } catch (error) {
-    console.error("Error getting blogs:", error.message);
+    console.error("Error getting blog content:", error.message);
     return res
       .status(500)
-      .json({ error: "An error occurred while retrieving blogs" });
+      .json({ error: "An error occurred while retrieving blog content" });
   }
 };
 

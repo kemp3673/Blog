@@ -5,11 +5,16 @@ const compression = require("compression");
 const cors = require("cors");
 const path = require("path");
 const app = express();
+// Import middleware
+const authenticateJWT = require("./utility/webTokens");
 // Import routes
+const authRoutes = require("./routes/protected/authRoutes");
 const blogRoutes = require("./routes/blogRoutes");
 const projectRoutes = require("./routes/projectRoutes");
 const userRoutes = require("./routes/userRoutes");
 const resumeRoutes = require("./routes/resumeRoutes");
+
+const PORT = process.env.PORT || 8000;
 
 // ***** MIDDLWARE *****
 app.use(
@@ -30,11 +35,10 @@ app.use(cors());
 app.use(express.json());
 
 // Serve up html file
-
 const buildPath = path.join(__dirname, "../client/build");
 app.use(express.static(buildPath));
 
-// ***** ROUTES *****
+// *****  OPEN ROUTES *****
 app.use("/api/blogs", blogRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/user", userRoutes);
@@ -52,13 +56,22 @@ app.get("/resume", (req, res) => {
   }
 });
 
+// Replace resume
+// app.post("/resume", (req, res) => {
+//   try {
+
+// Catch all for any other routes that are not defined above and send index.html
 app.get("*", (req, res) => {
   res.sendFile(path.join(buildPath, "index.html"));
 });
-// Import routes
+
+// Add middleware to verify web tokens
+// app.use(authenticateJWT);
+// *****  PROTECTED ROUTES *****
+app.use("/api/auth", authRoutes);
 
 // Start server on port in env file
-app.listen(3000, (error) => {
-  if (!error) console.log(`Server listening on port 3000`);
+app.listen(PORT, (error) => {
+  if (!error) console.log(`Server listening on port ${PORT}`);
   else console.log("Error occurred, server can't start", error);
 });

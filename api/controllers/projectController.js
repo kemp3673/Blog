@@ -1,3 +1,6 @@
+const db = require("../db/db.js");
+const executeQuery = require("../utility/executeQuery.js");
+
 const getProjects = async (req, res) => {
   res.status(200).json({ message: "All Projects" });
 };

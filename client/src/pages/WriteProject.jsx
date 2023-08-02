@@ -50,6 +50,7 @@ const WriteProject = () => {
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
+              maxlength="255"
             />
           </div>
           <div className="editor_container">
@@ -142,6 +143,7 @@ const WriteProject = () => {
                 placeholder="Enter Skill"
                 value={skillInput}
                 onChange={handleSkillInputChange}
+                maxlength="255"
               />
               <button type="submit">Add Skill</button>
             </form>

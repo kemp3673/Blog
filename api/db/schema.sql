@@ -35,7 +35,8 @@ CREATE TABLE screenshots (
     project_id INT NOT NULL,
     image_url VARCHAR(255) NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
+    FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE,
+    INDEX (project_id)
 );
 
 CREATE TABLE project_skills (
@@ -55,7 +56,8 @@ CREATE TABLE blogs (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     user_id INT NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    INDEX (user_id)
 );
 
 CREATE TABLE blog_content (
@@ -63,5 +65,6 @@ CREATE TABLE blog_content (
     blog_id INT NOT NULL,
     content TEXT NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (blog_id) REFERENCES blogs(id) ON DELETE CASCADE
+    FOREIGN KEY (blog_id) REFERENCES blogs(id) ON DELETE CASCADE,
+    INDEX (blog_id)
 );

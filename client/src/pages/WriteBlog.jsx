@@ -65,6 +65,7 @@ const WriteBlog = () => {
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
+              maxlength="255"
             />
           </div>
           <div className="writeblog_Title_Sum">
@@ -74,6 +75,7 @@ const WriteBlog = () => {
               type="text"
               value={summary}
               onChange={(e) => setSummary(e.target.value)}
+              maxlength="1000"
             />
           </div>
           <div className="editor_container">

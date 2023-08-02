@@ -1,3 +1,5 @@
+/**** ROUTE PREFIX: /api/blogs *****/
+
 const express = require("express");
 const router = express.Router();
 
@@ -13,20 +15,10 @@ const {
 // ROUTER //
 
 /**** BLOGS *****/
-
 // Get all blogs
 router.get("/", getBlogs);
 
 // Get one blog
 router.get("/:id", getSingleBlog);
-
-// Create a blog
-router.post("/", createBlog);
-
-// Delete a blog
-router.delete("/:id", deleteBlog);
-
-// Update a blog
-router.patch("/:id", updateBlog);
 
 module.exports = router;
