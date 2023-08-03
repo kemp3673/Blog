@@ -17,7 +17,7 @@
 
 ## Available Scripts
 
-In the project directory, you can run:
+## In the CLIENT directory, you can run:
 
 ### `npm start`
 
@@ -33,11 +33,22 @@ Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.\
+
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## In the API directory, you can run:
 
-### Mysql
+### `npm start`
+
+Runs the server with nodemon. Server will restart on any changes made to the server files.
+
+Server will run on port 3000 by default and can be changed in the .env file.
+
+Serves up the static files from the CLIENT/build folder which are created when running the npm run build command in the CLIENT directory.
+
+Additionally the server is the API for the client and will handle all requests to the database.
+
+## Mysql
 
 #### AWS EC2
 
@@ -136,7 +147,7 @@ mysql -u root -p --execute="source schema.sql"
 - #### POST
 
   - Upload resume pdf (will replace existing resume)
-  - query: {"resume": file}
+  - query: {"resume": file} (pdf only)
 
 ### /api/auth/blogs/write
 
@@ -144,7 +155,7 @@ mysql -u root -p --execute="source schema.sql"
   - Create a new blog entry
   - query: {
     - "title": string (max length 255),
-    - "description": string (max length 255),
+    - "description": string (max length 1000),
     - "content": string (no char limit),
     - "main_image": file,
     - "user_id": number
