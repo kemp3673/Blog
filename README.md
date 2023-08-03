@@ -81,3 +81,139 @@ NOTE: If you run this on a windows machine
 mysql -u root -p --execute="source schema.sql"
 
 ```
+
+# API Endpoints
+
+### /resume
+
+- GET
+  - Get resume pdf
+
+### /api/blogs
+
+- #### GET
+
+  - Retrieve 10 entry blogs (most recent)
+  - query: {"page": number} (optional)
+
+### /api/blogs/:id
+
+- #### GET
+  - Retrieve full blog details by blog id
+  - path variable: {"id": number}
+
+### /api/user/:id
+
+- #### GET
+  - Get user details by user id (return only name and img) to be used with blog entries
+  - path variables: {"id": number}
+
+### /api/projects
+
+- #### GET
+  - Get all projects
+
+### /api/projects/:id
+
+- #### GET
+  - Get project details by project id
+  - path variables: {"id": number}
+
+### /api/user/login
+
+- #### POST
+  - Log user in and create JWT
+  - query: {
+    - "email": string (max length 255),
+    - "password": string (max length 255)
+      - password verified with bcrypt
+  - }
+
+# Authenticated Routes - JWT Required for all
+
+### /resume
+
+- #### POST
+
+  - Upload resume pdf (will replace existing resume)
+  - query: {"resume": file}
+
+### /api/auth/blogs/write
+
+- #### POST
+  - Create a new blog entry
+  - query: {
+    - "title": string (max length 255),
+    - "description": string (max length 255),
+    - "content": string (no char limit),
+    - "main_image": file,
+    - "user_id": number
+  - }
+
+### /api/auth/blogs/:id
+
+- #### DELETE
+
+  - Delete blog entry by id
+  - path variable: {"id": number}
+
+- #### PATCH
+  - Update existing entry by id
+  - path variable: {"id": number}
+  - query (all fields optional): {
+    - "title": string (max length 255),
+    - "description": string (max length 1000),
+    - "content": string (no char limit),
+    - "main_image": file,
+    - "user_id": number
+    - }
+
+### /api/auth/user/update
+
+- #### PATCH
+  - Update user details
+  - query (all fields optional): {
+    - "name": string (max length 255),
+    - "email": string (max length 255),
+    - "password": string (max length 255)
+      - Password sanitization done on front end, but will be hashed on backend
+    - "img": file
+  - }
+
+### /api/auth/projects/write
+
+- #### POST
+  - Create new project entry
+  - query: {
+    - "title": string (max length 255),
+    - "image": file,
+    - "summary": string (max length 1000),
+    - "github": string (max length 255), (optional)
+    - "skills": [string, string, ...]
+  - }
+
+### /api/auth/projects/:id
+
+- #### DELETE
+
+  - Delete existing entry by project id
+  - path variables: {"id": number}
+
+- #### PATCH
+  - Update entry by project id
+  - path variable: {"id": number}
+  - query (all fields optional): {
+    - "title": string (max length 255),
+    - "image": file,
+    - "summary": string (max length 1000),
+    - "github": string (max length 255),
+    - "skills": [string, string, ...]
+  - }
+
+### /api/user/logout
+
+- #### POST
+  - Logs user out and destroys session
+  - query: {
+    - "user_id": number
+  - }

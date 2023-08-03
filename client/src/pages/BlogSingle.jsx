@@ -152,7 +152,6 @@ const BlogSingle = () => {
                 />
                 <div className="blog_info">
                   <span className="blog_author_name">{blog.author_name}</span>
-                  <br />
                   <span className="blog_date_posted">
                     Posted {convertDate(blog.created_at)}
                   </span>

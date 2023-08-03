@@ -23,10 +23,16 @@ app.use(
     methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
   })
 );
+// Use compression middleware
 app.use(compression());
 // Use body-parser middleware to parse request bodies
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+// Custom error handler middleware to catch all errors and send back json response
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: "Something went wrong!" });
+});
 
 // Tell express to use cors
 app.use(cors());
@@ -43,22 +49,6 @@ app.use("/api/blogs", blogRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/user", userRoutes);
 app.use("/resume", resumeRoutes);
-
-// Serve up resume
-app.get("/resume", (req, res) => {
-  try {
-    res.download("./static/resume.pdf");
-  } catch (error) {
-    throw {
-      status: 500,
-      message: "There was a problem retrieving the pdf file",
-    };
-  }
-});
-
-// Replace resume
-// app.post("/resume", (req, res) => {
-//   try {
 
 // Catch all for any other routes that are not defined above and send index.html
 app.get("*", (req, res) => {

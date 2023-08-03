@@ -540,6 +540,9 @@ $aboutBG: url("./assets/images/about_background.jpeg");
             }
           }
           .blog_info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             .blog_author_name {
               font-size: 14px;
               font-weight: bold;

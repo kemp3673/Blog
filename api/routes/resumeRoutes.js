@@ -11,6 +11,6 @@ const {
 
 router.get("/", getResume);
 
-router.put("/", UpdateResume);
+router.post("/", UpdateResume);
 
 module.exports = router;

@@ -6,7 +6,7 @@ const { hashPassword, comparePassword } = require("../utility/passwordHash.js");
 const getUserInfo = async (req, res) => {
   const id = req.params.id;
   console.log(id);
-  const query = `SELECT name, email, img FROM users WHERE id = ? LIMIT 1`;
+  const query = `SELECT name, img FROM users WHERE id = ? LIMIT 1`;
   try {
     const results = await executeQuery(query, [id]);
     return res.status(200).json(results);
@@ -33,9 +33,19 @@ const updateUserInfo = async (req, res) => {
   const values = [updating, email];
   // Check which fields are being updated and add them to the updating array
   email !== undefined && (updating.email = email);
-  password !== undefined && (updating.password = await hashPassword(password));
   name !== undefined && (updating.name = name);
   img !== undefined && (updating.img = img);
+  if (password !== undefined) {
+    try {
+      const hashedPassword = await hashPassword(password);
+      updating.password = hashedPassword;
+    } catch (error) {
+      console.error("Error hashing password:", error.message);
+      return res
+        .status(500)
+        .json({ error: "An error occurred while updating user" });
+    }
+  }
 
   try {
     // Check if the blog entry exists
@@ -76,6 +86,14 @@ const login = (req, res) => {
           message: "Incorrect password",
         };
       }
+      // Assign a token to the user
+      const token = jwt.sign(
+        { id: user.id, email: user.email },
+        process.env.JWT_SECRET,
+        { expiresIn: "1h" }
+      );
+      // Send the token to the user
+      res.cookie("token", token, { httpOnly: true });
       res.status(200).json({ message: "Login successful" });
     })
     .catch((error) => {

@@ -1,18 +1,21 @@
-// const { replaceExistingPDF } = require("../utility/replaceExistingPDF");
+const { replacePDF } = require("../utility/pdfUtils");
 
 const getResume = async (req, res) => {
   try {
     res.download("./static/resume.pdf");
   } catch (error) {
-    throw {
-      status: 500,
-      message: "There was a problem retrieving the pdf file",
-    };
+    res
+      .status(500)
+      .json({ message: "There was a problem downloading the file" });
   }
 };
 
 const UpdateResume = async (req, res) => {
-  res.status(200).json({ message: "Update Resume" });
+  try {
+    await replacePDF(req, res);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
 module.exports = {

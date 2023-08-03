@@ -1,12 +1,15 @@
+require("dotenv").config();
 const bcrypt = require("bcryptjs");
 
 // Function to hash password
 const hashPassword = async (password) => {
   try {
-    const salt = await bcrypt.genSalt(10);
+    console.log(process.env.SALT_ROUNDS);
+    const salt = await bcrypt.genSalt(parseInt(process.env.SALT_ROUNDS));
     const hashedPassword = await bcrypt.hash(password, salt);
     return hashedPassword;
   } catch (error) {
+    console.log(error.message);
     throw {
       status: 500,
       message: "There was a problem hashing the password",
