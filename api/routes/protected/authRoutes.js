@@ -60,6 +60,9 @@ router.patch("/blogs/:id", upload.single("main_image"), updateBlog);
 /**** PROJECT ROUTES *****/
 // Create a project
 router.post("/projects/write", createProject);
+// TODO - Use below code to upload images to server for both main_image and screenshots
+// router.post("/projects/write", upload.array("screenshots", 5), upload.single("main_image"), createProjects);
+// Access main_image with req.file and screenshots with req.files
 
 // Delete a project
 router.delete("/projects/:id", deleteProject);

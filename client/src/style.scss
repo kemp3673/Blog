@@ -359,13 +359,12 @@ $aboutBG: url("./assets/images/about_background.jpeg");
         flex-direction: column;
         margin-top: 50px;
         gap: 50px;
-        padding: 0 20px;
-
         .post {
           display: flex;
           gap: 50px;
           align-items: center;
           position: relative;
+          padding: 0 20px;
           // Change side of image and text if odd index
           &:nth-child(2n+1) {
             flex-direction: row-reverse;
@@ -423,7 +422,6 @@ $aboutBG: url("./assets/images/about_background.jpeg");
               font-size: 18px;
               color: $color1;
               text-align: justify;
-              padding: 0 20px;
             }
 
             .post_button {
@@ -503,6 +501,50 @@ $aboutBG: url("./assets/images/about_background.jpeg");
       justify-content: center;
       height: calc(100vh - 60px);
       overflow-y: auto;
+      .confirmation_dialog_container {
+        width: 100vw;
+        min-width: 280px;
+        height: 100vh;
+        display: flex;
+        position: absolute;
+        justify-content: center;
+        z-index: 50;
+        top: 0;
+        right: 0;
+        background-color: rgb(0, 0, 0, 0.8);
+        align-items: center;
+        .confirmation-dialog-inner {
+          background-color: whitesmoke;
+          padding: 20px;
+          h2 {
+            text-align: center;
+            color: $color1;
+            font-size: 1.5rem;
+          }
+          .confirmation-dialog-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            button {
+              padding: 10px;
+              font-size: 1.1rem;
+              border: none;
+              background-color: $color1;
+              color: $color5;
+              cursor: pointer;
+              transition: all 0.2s ease-in-out;
+              padding: 10px 20px;
+              margin: 10px;
+            }
+            button:hover {
+              background-color: $color5;
+              color: $color1;
+              box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+            }
+          }
+        }
+      }
       .blog_single_inner {
         width: 100vw;
         padding: 0 20px 0 20px;
@@ -643,6 +685,18 @@ $aboutBG: url("./assets/images/about_background.jpeg");
         }
       }
       @media screen and (max-width: 768px) {
+        .confirmation_dialog_container {
+          .confirmation-dialog-inner {
+            h2 {
+              font-size: 1.2rem;
+            }
+            .confirmation-dialog-buttons {
+              button {
+                font-size: 0.8rem;
+              }
+            }
+          }
+        }
         .blog_single_inner {
           flex-direction: column;
           gap: 20px;

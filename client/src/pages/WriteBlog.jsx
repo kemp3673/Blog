@@ -93,6 +93,10 @@ const WriteBlog = () => {
     }
   };
 
+  const handleCancel = () => {
+    window.location.href = "/blog";
+  };
+
   /*
    * Quill modules to attach to editor
    * See https://quilljs.com/docs/modules/ for complete options
@@ -174,12 +178,25 @@ const WriteBlog = () => {
         <div className="writeblog_menu">
           <div className="writeblog_menu_item">
             <h1>Publish</h1>
-            <span>
-              <b>Status: </b> Draft
-            </span>
-            <span>
-              <b>Visibility: </b> Public
-            </span>
+            {isEdit ? (
+              <>
+                <span>
+                  <b>Status: </b> Posted
+                </span>
+                <span>
+                  <b>Visibility: </b> Public
+                </span>
+              </>
+            ) : (
+              <>
+                <span>
+                  <b>Status: </b> Draft
+                </span>
+                <span>
+                  <b>Visibility: </b> Private
+                </span>
+              </>
+            )}
             <input
               type="file"
               id="file"
@@ -203,14 +220,18 @@ const WriteBlog = () => {
             <div className="write_buttons">
               {isEdit ? (
                 <>
-                  <button className="write_button">Save as Draft</button>
+                  <button className="write_button" onClick={handleCancel}>
+                    Cancel
+                  </button>
                   <button className="write_button" onClick={handleUpdate}>
                     Update
                   </button>
                 </>
               ) : (
                 <>
-                  <button className="write_button">Save as Draft</button>
+                  <button className="write_button" onClick={handleCancel}>
+                    Cancel
+                  </button>
                   <button className="write_button" onClick={handlePost}>
                     Post
                   </button>
@@ -218,7 +239,7 @@ const WriteBlog = () => {
               )}
             </div>
           </div>
-          <div className="writeblog_menu_item">
+          {/* <div className="writeblog_menu_item">
             <h1>Categories</h1>
             <div className="radio_group">
               <input type="radio" name="category" id="insight" />
@@ -236,7 +257,7 @@ const WriteBlog = () => {
               <input type="radio" name="category" id="other" />
               <label htmlFor="other">Other</label>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

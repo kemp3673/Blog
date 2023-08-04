@@ -2,6 +2,7 @@ const express = require("express");
 const multer = require("multer");
 const path = require("path");
 const db = require("../db/db.js");
+const fs = require("fs");
 const executeQuery = require("../utility/executeQuery.js");
 
 const getBlogs = async (req, res) => {
@@ -108,6 +109,9 @@ const createBlog = async (req, res) => {
 
 const deleteBlog = async (req, res) => {
   const blogId = req.params.id;
+
+  // Get the path of the image to be deleted
+  const imagePathQuery = `SELECT main_image FROM blogs WHERE id = ?`;
   const query = `DELETE FROM blogs WHERE id = ?`;
   const checkQuery = `SELECT * FROM blogs WHERE id = ?`;
   try {
@@ -117,6 +121,12 @@ const deleteBlog = async (req, res) => {
     if (results.length === 0) {
       return res.status(404).json({ error: "Blog entry not found" });
     }
+    // Get the path of the image to be deleted
+    const imagePathResults = await executeQuery(imagePathQuery, [blogId]);
+    const imagePath = imagePathResults[0].main_image;
+    // Delete the image from the server
+    fs.unlinkSync(imagePath);
+    // Delete the blog entry from the database
     await executeQuery(query, [blogId]);
     // Blog entry successfully deleted
     return res.status(200).json({
@@ -131,7 +141,6 @@ const deleteBlog = async (req, res) => {
 };
 
 const updateBlog = async (req, res) => {
-  const { path } = req.file ? req.file : "";
   // ID of which blog entry to update
   const blogId = req.params.id;
   // Array to store all fields that are being updated
@@ -145,15 +154,27 @@ const updateBlog = async (req, res) => {
   const values = [updating, blogId];
   // Extract all possible fields from the request body
   const { title, description, content, user_id } = req.body;
-  const imagePath = req.file.path;
 
   // Check which fields are being updated and add them to the updating array
   title !== undefined && (updating.title = title);
   description !== undefined && (updating.description = description);
-  imagePath !== undefined && (updating.main_image = imagePath);
   user_id !== undefined && (updating.user_id = user_id);
   // Update the content field using a parameterized query
   content !== undefined && (contentUpdate.content = content);
+
+  // If a new image is being uploaded, update the main_image field
+  if (req.file) {
+    updating.main_image = req.file.path;
+    // GET THE OLD IMAGE PATH FROM THE DATABASE
+    const oldImageQuery = `SELECT main_image FROM blogs WHERE id = ?`;
+    const oldImageResults = await executeQuery(oldImageQuery, [blogId]);
+    const oldImagePath = oldImageResults[0].main_image;
+    // Unlink the old image from the server
+    fs.unlink(oldImagePath, (err) => {
+      if (err) throw err;
+      console.log(`Old image successfully deleted for blog ${blogId}`);
+    });
+  }
 
   try {
     // Check if the blog entry exists
