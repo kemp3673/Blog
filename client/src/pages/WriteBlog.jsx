@@ -18,8 +18,6 @@ const WriteBlog = () => {
   const queryParams = new URLSearchParams(location.search);
   const blogId = queryParams.get("edit");
 
-  console.log("selectedFiles: ", selectedFiles);
-
   useEffect(() => {
     const getFiles = async () => {
       try {
@@ -49,17 +47,13 @@ const WriteBlog = () => {
     formData.append("main_image", selectedFiles);
     formData.append("user_id", 1); // TODO change to user_id
     try {
-      const { data } = await axios.patch(
-        `/api/auth/blogs/${blogId}`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      alert("Blog updated!");
-      console.log(data);
+      await axios.patch(`/api/auth/blogs/${blogId}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      // Redirect to blog page
+      window.location.href = `/blog`;
     } catch (error) {
       console.log(error);
     }
@@ -74,13 +68,13 @@ const WriteBlog = () => {
     formData.append("user_id", 1); // TODO change to user_id
 
     try {
-      const { data } = await axios.post("/api/auth/blogs/write", formData, {
+      await axios.post("/api/auth/blogs/write", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      alert("Blog posted!");
-      console.log(data);
+      // Redirect to blog page
+      window.location.href = `/blog`;
     } catch (error) {
       console.log(error);
     }
