@@ -42,14 +42,24 @@ const WriteBlog = () => {
   }, []);
 
   const handleUpdate = async () => {
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", summary);
+    formData.append("content", text);
+    formData.append("main_image", selectedFiles);
+    formData.append("user_id", 1); // TODO change to user_id
     try {
-      const { data } = await axios.patch(`/api/auth/blogs/${blogId}`, {
-        title: title,
-        description: summary,
-        content: text,
-        main_image: selectedFiles,
-      });
+      const { data } = await axios.patch(
+        `/api/auth/blogs/${blogId}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       alert("Blog updated!");
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -179,6 +189,7 @@ const WriteBlog = () => {
             <input
               type="file"
               id="file"
+              accept="image/*"
               style={{ display: "none" }}
               onChange={handleImageUpload}
             />
