@@ -97,8 +97,11 @@ const BlogSingle = () => {
 
   const { id } = useParams();
 
+  console.log(blog);
+
   const getBlog = async () => {
     try {
+      // TODO change to /api/auth/user/${user_id}
       axios.get(`/api/blogs/${id}`).then((res) => {
         setBlog(res.data[0]);
         setLoading(false);
@@ -118,7 +121,8 @@ const BlogSingle = () => {
 
   useEffect(() => {
     const jwt = Cookies.get("jwt");
-    setHasToken(!!jwt);
+    // setHasToken(!!jwt); // TODO uncomment this line
+    setHasToken(true); // TODO remove this line
 
     const blogLink = document.getElementById("blog");
     blogLink.classList.add("active");
@@ -143,7 +147,7 @@ const BlogSingle = () => {
         {blog && !loading ? (
           <>
             <div className="blog_single_content">
-              <img src={blog.main_image} alt={blog.title} />
+              <img src={`/uploads/${blog.main_image}`} alt={blog.title} />
               <div className="blog_author">
                 <img
                   className="blog_author_image"

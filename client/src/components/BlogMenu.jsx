@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
 const BlogMenu = ({ id }) => {
   const [additionalBlogs, setAdditionalBlogs] = useState([]);
 
   useEffect(() => {
     axios
-      .get("/api/blogs")
+      .get("/api/blogs") // TODO change to /api/auth/user/${user_id}
       .then((res) => {
         setAdditionalBlogs(res.data);
       })
@@ -25,7 +24,7 @@ const BlogMenu = ({ id }) => {
             <div className="blog_menu_item" key={blog.id}>
               <img
                 className="blog_menu_img"
-                src={blog.main_image}
+                src={`/uploads/${blog.main_image}`}
                 alt={blog.title}
               />
               <div className="blog_menu_item_content">

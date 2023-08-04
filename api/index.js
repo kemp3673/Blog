@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const multer = require("multer");
 const bodyParser = require("body-parser");
 const compression = require("compression");
 const cors = require("cors");
@@ -23,6 +24,8 @@ app.use(
     methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
   })
 );
+// Set the destination folder for image uploads
+const upload = multer({ dest: "uploads/" });
 // Use compression middleware
 app.use(compression());
 // Use body-parser middleware to parse request bodies
@@ -49,16 +52,17 @@ app.use("/api/blogs", blogRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/user", userRoutes);
 app.use("/resume", resumeRoutes);
-
-// Catch all for any other routes that are not defined above and send index.html
-app.get("*", (req, res) => {
-  res.sendFile(path.join(buildPath, "index.html"));
-});
+app.use("/uploads/:image", express.static("uploads"));
 
 // Add middleware to verify web tokens
 // app.use(authenticateJWT);
 // *****  PROTECTED ROUTES *****
 app.use("/api/auth", authRoutes);
+
+// Catch all for any other routes that are not defined above and send index.html
+app.get("*", (req, res) => {
+  res.sendFile(path.join(buildPath, "index.html"));
+});
 
 // Start server on port in env file
 app.listen(PORT, (error) => {

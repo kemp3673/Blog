@@ -353,6 +353,7 @@ $aboutBG: url("./assets/images/about_background.jpeg");
       height: calc(100vh - 60px);
       overflow-y: auto;
       .posts {
+        width: 100%;
         max-width: 1200px;
         display: flex;
         flex-direction: column;
@@ -422,6 +423,7 @@ $aboutBG: url("./assets/images/about_background.jpeg");
               font-size: 18px;
               color: $color1;
               text-align: justify;
+              padding: 0 20px;
             }
 
             .post_button {

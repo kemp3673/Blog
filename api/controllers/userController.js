@@ -5,8 +5,21 @@ const { hashPassword, comparePassword } = require("../utility/passwordHash.js");
 // To pull user data for profile page
 const getUserInfo = async (req, res) => {
   const id = req.params.id;
-  console.log(id);
   const query = `SELECT name, img FROM users WHERE id = ? LIMIT 1`;
+  try {
+    const results = await executeQuery(query, [id]);
+    return res.status(200).json(results);
+  } catch (error) {
+    console.error("Error getting user info:", error.message);
+    return res
+      .status(500)
+      .json({ error: "An error occurred while retrieving user info" });
+  }
+};
+
+const getDetailedUserInfo = async (req, res) => {
+  const id = req.params.id;
+  const query = `SELECT name, img, email FROM users WHERE id = ? LIMIT 1`;
   try {
     const results = await executeQuery(query, [id]);
     return res.status(200).json(results);
@@ -107,6 +120,7 @@ const logout = async (req, res) => {
 
 module.exports = {
   getUserInfo,
+  getDetailedUserInfo,
   updateUserInfo,
   login,
   logout,

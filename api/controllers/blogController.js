@@ -1,3 +1,6 @@
+const express = require("express");
+const multer = require("multer");
+const path = require("path");
 const db = require("../db/db.js");
 const executeQuery = require("../utility/executeQuery.js");
 
@@ -28,21 +31,23 @@ const getSingleBlog = async (req, res) => {
   const query = `
   SELECT
   bc.content,
+  b.description,
   b.title,
   b.main_image,
   b.created_at,
   b.updated_at,
+  b.id,
   u.name AS author_name,
   u.img AS author_img
-FROM
-  blogs b
-INNER JOIN
-  blog_content bc ON b.id = bc.blog_id
-INNER JOIN
-  users u ON b.user_id = u.id
-WHERE
-  b.id = ?;
-  `;
+  FROM
+    blogs b
+  INNER JOIN
+    blog_content bc ON b.id = bc.blog_id
+  INNER JOIN
+    users u ON b.user_id = u.id
+  WHERE
+    b.id = ?;
+    `;
   try {
     const results = await executeQuery(query, [blogId]);
     // Blog entry successfully created
@@ -56,7 +61,8 @@ WHERE
 };
 
 const createBlog = async (req, res) => {
-  const { title, description, main_image, content, user_id } = req.body;
+  const { title, description, content, user_id } = req.body;
+  const { path } = req.file ? req.file : "";
 
   const blogQuery = `
     INSERT INTO blogs (title, description, main_image, user_id)
@@ -68,12 +74,16 @@ const createBlog = async (req, res) => {
     VALUES (?, ?)
   `;
 
+  // Save main_image to server and get the path
+  const imagePath = req.file.path;
+  // const imageUrl = `http://127.0.0.1:3000/api/${imagePath}`;
+
   try {
     // Insert into the 'blogs' table
     const blogResults = await executeQuery(blogQuery, [
       title,
       description,
-      main_image,
+      imagePath,
       user_id,
     ]);
 
@@ -121,10 +131,12 @@ const deleteBlog = async (req, res) => {
 };
 
 const updateBlog = async (req, res) => {
+  const { path } = req.file ? req.file : "";
   // ID of which blog entry to update
   const blogId = req.params.id;
   // Array to store all fields that are being updated
   const updating = {};
+  const contentUpdate = {};
   // Check if id exists in database
   const checkQuery = `SELECT * FROM blogs WHERE id = ?`;
   // Query to update the blog entry
@@ -132,14 +144,16 @@ const updateBlog = async (req, res) => {
   // Values to be inserted into the query
   const values = [updating, blogId];
   // Extract all possible fields from the request body
-  const { title, description, main_image, content, user_id } = req.body;
+  const { title, description, content, user_id } = req.body;
+  const imagePath = req.file.path;
 
   // Check which fields are being updated and add them to the updating array
   title !== undefined && (updating.title = title);
   description !== undefined && (updating.description = description);
-  main_image !== undefined && (updating.main_image = main_image);
-  content !== undefined && (updating.content = content);
+  imagePath !== undefined && (updating.main_image = imagePath);
   user_id !== undefined && (updating.user_id = user_id);
+  // Update the content field using a parameterized query
+  content !== undefined && (contentUpdate.content = content);
 
   try {
     // Check if the blog entry exists
@@ -149,7 +163,15 @@ const updateBlog = async (req, res) => {
       return res.status(404).json({ error: "Blog entry not found" });
     }
     // If the blog entry exists, update it
-    await executeQuery(query, values);
+    if (Object.keys(updating).length !== 0) {
+      await executeQuery(query, values);
+    }
+    if (Object.keys(contentUpdate).length !== 0) {
+      await executeQuery(`UPDATE blog_content SET ? WHERE blog_id = ?`, [
+        contentUpdate,
+        blogId,
+      ]);
+    }
     // Blog entry successfully updated
     return res.status(200).json({
       message: "Blog entry updated successfully",

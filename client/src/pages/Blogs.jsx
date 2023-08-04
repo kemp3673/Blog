@@ -3,13 +3,13 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 const Blogs = () => {
-  const [exampleBlogs, setExampleBlogs] = useState([]);
+  const [blogData, setBlogData] = useState([]);
 
   useEffect(() => {
     axios
-      .get("/api/blogs")
+      .get("/api/blogs") // TODO change to /api/auth/user/${user_id}
       .then((res) => {
-        setExampleBlogs(res.data);
+        setBlogData(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -25,12 +25,12 @@ const Blogs = () => {
 
   return (
     <div className="posts_container wrapper">
-      {exampleBlogs.length > 0 ? (
+      {blogData.length > 0 ? (
         <div className="posts">
-          {exampleBlogs.map((blog) => (
+          {blogData.map((blog) => (
             <div className="post" key={blog.id}>
               <div className="post_image">
-                <img src={blog.main_image} alt={blog.title} />
+                <img src={`/uploads/${blog.main_image}`} alt={blog.title} />
               </div>
               <div className="post_content">
                 <h1 className="post_title">{blog.title}</h1>
