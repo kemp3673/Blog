@@ -1,6 +1,5 @@
 require("dotenv").config();
 const express = require("express");
-const multer = require("multer");
 const bodyParser = require("body-parser");
 const compression = require("compression");
 const cors = require("cors");
@@ -24,8 +23,7 @@ app.use(
     methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
   })
 );
-// Set the destination folder for image uploads
-const upload = multer({ dest: "uploads/" });
+
 // Use compression middleware
 app.use(compression());
 // Use body-parser middleware to parse request bodies
