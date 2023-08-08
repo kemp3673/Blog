@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 import FileDownload from "js-file-download";
 import axios from "axios";
+import CookieConsent from "react-cookie-consent";
 
 // Image
 import BeardedDev from "../assets/images/bearded_dev.jpg";
@@ -23,6 +24,11 @@ const getResume = async () => {
 const LandingPage = () => {
   return (
     <>
+      <CookieConsent location={"top"} expires={150}>
+        We use cookies solely to track your authorization status on our website.
+        By continuing to use the site, you consent to the use of these cookies
+        for this purpose.
+      </CookieConsent>
       <div className="landing_page_container">
         <div className="landing_page_inner">
           <div className="landing_page_left">
