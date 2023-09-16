@@ -823,9 +823,35 @@ $aboutBG: url("./assets/images/about_background.jpeg");
               border: none;
               padding: 0;
                 margin: 0;
+              button:hover {
+                box-shadow: none;
+              }
               .ql-toolbar {
                 background-color: $color5;
+                display: flex;
+                flex-wrap: wrap;
               }
+              .ql-formats {
+                margin-right: 15px;
+                align-items: center;
+                justify-content: center;
+                display: flex;
+                width: fit-content;
+              }
+              .ql-picker-label {
+                border: 1px solid transparent;
+                height: fit-content;
+            }
+              .ql-picker.ql-font {
+                width: 108px;
+                align-self: center;
+                vertical-align: middle;
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+            }
               .ql-container {
                 position: relative;
                 height: fit-content;
