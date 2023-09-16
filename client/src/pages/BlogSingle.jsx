@@ -5,7 +5,7 @@ import { Link, useParams } from "react-router-dom";
 //Components
 import BlogMenu from "../components/BlogMenu";
 import ConfirmationDialog from "../components/ConfirmationDialog";
-
+import Loading from "../components/Loading";
 // Icons
 import { IconContext } from "react-icons";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
@@ -82,6 +82,11 @@ const BlogSingle = () => {
 
   return (
     <div className="blog_single_container">
+      {loading && (
+        <div className="loading">
+          <Loading />
+        </div>
+      )}
       {isOpen && (
         <div className="confirmation_dialog_container">
           <ConfirmationDialog

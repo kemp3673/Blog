@@ -24,7 +24,7 @@ const getResume = async () => {
 const LandingPage = () => {
   return (
     <>
-      <CookieConsent location={"top"} expires={150}>
+      <CookieConsent location={"bottom"} expires={150}>
         We use cookies solely to track your authorization status on our website.
         By continuing to use the site, you consent to the use of these cookies
         for this purpose.

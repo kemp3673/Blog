@@ -19,6 +19,24 @@ $aboutBG: url("./assets/images/about_background.jpeg");
       font-weight: 400;
     }
 
+    button {
+      padding: 10px;
+              font-size: 1.1rem;
+              border: none;
+              background-color: $color1;
+              color: $color5;
+              cursor: pointer;
+              transition: all 0.2s ease-in-out;
+              padding: 10px 20px;
+              margin: 10px;
+    }
+    button:hover {
+              background-color: $color5;
+              color: $color1;
+              box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+
+    }
+
     .wrapper {
       display: flex;
       position: relative;
@@ -113,28 +131,29 @@ $aboutBG: url("./assets/images/about_background.jpeg");
           .lp_buttons_wrapper {
             display: flex;
             flex-direction: row;
-            button {
-              display: flex;
-              padding: 10px;
-              font-size: 1.1rem;
-              border: none;
-              background-color: $color1;
-              align-items: center;
-              justify-content: center;
-              color: $color5;
-              cursor: pointer;
-              transition: all 0.2s ease-in-out;
-              padding: 10px 20px;
-              margin: 10px;
-            }
+            // TODO REMOVE BUTTONS AS THEY ARE STYLED IN APP CONTAINER
+            // button {
+            //   display: flex;
+            //   padding: 10px;
+            //   font-size: 1.1rem;
+            //   border: none;
+            //   background-color: $color1;
+            //   align-items: center;
+            //   justify-content: center;
+            //   color: $color5;
+            //   cursor: pointer;
+            //   transition: all 0.2s ease-in-out;
+            //   padding: 10px 20px;
+            //   margin: 10px;
+            // }
 
             a {text-decoration: none;}
 
-            button:hover {
-              background-color: $color5;
-              color: $color1;
-              box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
-            }
+            // button:hover {
+            //   background-color: $color5;
+            //   color: $color1;
+            //   box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+            // }
           }
         }
         .landing_page_right {
@@ -605,8 +624,13 @@ $aboutBG: url("./assets/images/about_background.jpeg");
               cursor: pointer;
             }
           }
+          pre {
+            white-space: normal !important;
+            background-color: #e4e4e4;
+            padding: 0.5em;
+            border: 1px solid black;
+          }
           .blog_single_title {
-
             padding-left: 10px;
             display: flex;
             font-size: 48px;
@@ -619,8 +643,13 @@ $aboutBG: url("./assets/images/about_background.jpeg");
             font-size: 18px;
             color: $color1;
             line-height: 30px;
-            text-align: justify;
             margin: 0;
+          }
+          .blog_single_text:not(h2) {
+            text-align: justify;
+          }
+          .blog_single_text h2 {
+            text-align: left;
           }
         }
         .blog_single_menu {
@@ -1218,6 +1247,10 @@ $aboutBG: url("./assets/images/about_background.jpeg");
         flex-direction: column;
         align-items: center;
         text-align: center;
+        h1 {
+          font-size: 48px;
+          color: $color1;
+        }
         .profile_image{
           height: 200px;
           width: 200px;
@@ -1229,14 +1262,58 @@ $aboutBG: url("./assets/images/about_background.jpeg");
             object-fit: cover;
           }
         }
-        .profile_info {
-
-        }
         .account_posts {
           display: flex;
           flex-direction: column;
           align-items: center;
           gap: 20px;
+          button {
+            padding: 10px;
+            font-size: 1.1rem;
+            border: none;
+            background-color: $color1;
+            color: $color5;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            padding: 10px 20px;
+            margin: 10px;
+            a {
+              text-decoration: none;
+              color: $color5;
+            }
+          }
+          button:hover {
+            background-color: $color5;
+            color: $color1;
+            box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+            a {
+              color: $color1;
+            }
+          }
+          form {
+            border:rgb(0, 0, 0, 0.8) solid 1px;
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            align-items: center;
+            input::file-selector-button {
+            padding: 10px;
+            font-size: 1.1rem;
+            border: none;
+            background-color: $color1;
+            color: $color5;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            padding: 10px 20px;
+            margin: 10px;
+            }
+          }
+          .account_posts_links {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
+          }
           .account_post {
             display: flex;
             flex-direction: column;
@@ -1246,6 +1323,7 @@ $aboutBG: url("./assets/images/about_background.jpeg");
         }
       }
     }
+
 
     // Login
     .auth {

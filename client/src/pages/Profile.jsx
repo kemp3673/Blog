@@ -12,12 +12,12 @@ const Profile = () => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const { data } = await axios.get(
-          `/api/auth/user/${user_id}` // TODO change to /api/auth/user/${user_id}
-        );
+        const { data } = await axios.get(`/api/auth/user/${user_id}`);
         setUser(data[0]);
       } catch (error) {
         console.log(error);
+        const { data } = await axios.get(`/api/auth/user/${user_id}`);
+        setUser(data[0]);
       }
     };
     getUser();
@@ -49,7 +49,7 @@ const Profile = () => {
     const formData = new FormData();
     formData.append("resume", selectedFile);
     // Send form data to server
-    const { data } = await axios.post(`/api/auth/resume`, formData); // TODO change to /api/auth/user/${user_id}
+    const { data } = await axios.post(`/api/auth/resume`, formData);
     setResumeMessage(data.message);
   };
 
