@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { IconContext } from "react-icons";
 
@@ -7,27 +7,51 @@ import { BsFillPersonFill } from "react-icons/bs";
 import { BsPhone } from "react-icons/bs";
 import { FiMail } from "react-icons/fi";
 
-const showDropdown = () => {
-  // Toggle dropdown
-  const dropdown = document.querySelector(".navBar_right_dropdown");
-  dropdown.classList.toggle("active");
-  // Add event listener to close dropdown when user clicks outside of dropdown
-  window.onclick = function (event) {
-    if (
-      dropdown.classList.contains("active") &&
-      !event.target.matches(".profile_icon")
-    ) {
-      dropdown.classList.remove("active");
-    }
-  };
-  // Remove event listener when component unmounts
-  return () => {
-    window.removeEventListener("click", showDropdown);
-  };
-};
-
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  // Close mobile overlay if opened
+  const closeOverlay = (event) => {
+    // If target is not navBar_right_mobile_menu or it's children set is open to false
+    if (
+      !event.target.closest(".navBar_right_mobile_menu") &&
+      !event.target.closest(".hamburger")
+    ) {
+      setIsOpen(false);
+    }
+  };
+
+  // HANDLES LOGO ICON TOGGLE
+  const showDropdown = () => {
+    // Toggle dropdown
+    const dropdown = document.querySelector(".navBar_right_dropdown");
+    dropdown.classList.toggle("active");
+    // Add event listener to close dropdown when user clicks outside of dropdown
+    window.onclick = function (event) {
+      if (
+        dropdown.classList.contains("active") &&
+        !event.target.matches(".profile_icon")
+      ) {
+        dropdown.classList.remove("active");
+      }
+    };
+    // Remove event listener when component unmounts
+    return () => {
+      window.removeEventListener("click", showDropdown);
+    };
+  };
+
+  useEffect(() => {
+    const appContainer = document.querySelector(".app_container");
+    if (isOpen) {
+      // Disable ability to scroll on body
+      appContainer.style.height = "100vh";
+      appContainer.style.overflowY = "hidden";
+    } else {
+      // Enable ability to scroll on body
+      appContainer.style.height = "fit-content";
+      appContainer.style.overflowY = "visible";
+    }
+  }, [isOpen]);
 
   return (
     <>
@@ -92,7 +116,7 @@ const Navbar = () => {
               </Link>
             </div>
           </div>
-          <div className="navBar_right_mobile">
+          <div className="navBar_right_mobile" onClick={(e) => closeOverlay(e)}>
             <div className="hamburger" onClick={(e) => setIsOpen(!isOpen)}>
               <span className={`line1 ${isOpen ? "active" : ""}`}></span>
               <span className={`line2 ${isOpen ? "active" : ""}`}></span>

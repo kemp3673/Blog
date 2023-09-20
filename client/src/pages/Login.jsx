@@ -4,7 +4,7 @@ import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 // Handle toggling password visibility
 const togglePasswordVisibility = () => {
-  const password = document.getElementById("password");
+  const password = document.getElementById("current-password");
   const showPasswordIcon = document.querySelector(".show_password_icon");
   const hidePasswordIcon = document.querySelector(".hide_password_icon");
   if (password.type === "password") {
@@ -23,9 +23,21 @@ const Login = () => {
     <div className="wrapper auth">
       <h1>Login</h1>
       <form>
-        <input type="text" id="email" placeholder="Email" />
+        <input
+          type="text"
+          id="email"
+          placeholder="Email"
+          autocomplete="true"
+          aria-label="login email"
+        />
         <div className="password">
-          <input type="password" id="password" placeholder="Password" />
+          <input
+            type="password"
+            id="current-password"
+            placeholder="Password"
+            autocomplete="current-password"
+            aria-label="login password"
+          />
           <IconContext.Provider
             value={{
               className: "shared-class profile_icon",

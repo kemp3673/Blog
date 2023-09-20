@@ -149,9 +149,7 @@ const BlogSingle = () => {
               <BlogMenu id={id} />
             </div>
           </>
-        ) : (
-          <p>Loading...</p>
-        )}
+        ) : null}
       </div>
     </div>
   );

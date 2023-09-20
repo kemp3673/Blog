@@ -52,8 +52,8 @@ $aboutBG: url("./assets/images/about_background.jpeg");
       height: calc(100vh - 60px);
       width: 100vw;
       display: flex;
-        justify-content: center;
-        align-items: center;
+      justify-content: center;
+      align-items: center;
 
       .spinner {
         position: absolute;
@@ -196,7 +196,7 @@ $aboutBG: url("./assets/images/about_background.jpeg");
     // About
     .about_container {
       padding: 0 20px;
-      height: calc(100vh - 60px);
+      // height: calc(100vh - 60px);
       overflow-y: auto;
       display: flex;
       flex-direction: column;
@@ -223,16 +223,16 @@ $aboutBG: url("./assets/images/about_background.jpeg");
         }
         .about_contact {
           h1 {
-            margin: 10px;
+            margin: 1em;
           }
           ul {
             display: flex;
             flex-direction: row;
             justify-content: center;
             align-items: center;
-            gap: 10px;
+            gap: 2em;
             padding: 0;
-            margin-top: 10px;
+            margin-top: 1em;
             li {
               list-style: none;
               a {
@@ -369,7 +369,7 @@ $aboutBG: url("./assets/images/about_background.jpeg");
 
     // Blogs
     .posts_container {
-      height: calc(100vh - 60px);
+      // height: calc(100vh - 60px);
       overflow-y: auto;
       .posts {
         width: 100%;
@@ -394,6 +394,7 @@ $aboutBG: url("./assets/images/about_background.jpeg");
             flex:2;
             position: relative;
             z-index: 2;
+            background-color: #02577a;
             // Create a div with the same height as the image in order to create a colored underlay
             &::after{
               content: "";
@@ -518,7 +519,7 @@ $aboutBG: url("./assets/images/about_background.jpeg");
     .blog_single_container {
       display: flex;
       justify-content: center;
-      height: calc(100vh - 60px);
+      // height: calc(100vh - 60px);
       overflow-y: auto;
       .confirmation_dialog_container {
         width: 100vw;
@@ -771,15 +772,25 @@ $aboutBG: url("./assets/images/about_background.jpeg");
     .writeblog_container {
       display: flex;
       justify-content: center;
-      height: calc(100vh - 60px);
+      // height: calc(100vh - 60px);
       overflow-y: auto;
+      .loading {
+        height: calc(100vh - 60px);
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        background-color: rgb(0, 0, 0, 0.6);
+        z-index: 999;
+      }
       .writeblog_inner {
         padding: 0 20px;
         width: 100vw;
         max-width: 1200px;
         display: flex;
         flex-direction: row;
-        height: calc(100vh - 60px);
+        // height: calc(100vh - 60px);
         gap: 20px;
         .writeblog_content {
           width: 100%;
@@ -1066,7 +1077,7 @@ $aboutBG: url("./assets/images/about_background.jpeg");
       text-align: center;
       gap: 1rem;
       text-decoration: none;
-      height: calc(100vh - 60px);
+      // height: calc(100vh - 60px);
       overflow-y: auto;
       a {
         text-decoration: none;
@@ -1169,7 +1180,7 @@ $aboutBG: url("./assets/images/about_background.jpeg");
     .single_project_container {
       display: flex;
       width: 100vw;
-      height: calc(100vh - 60px);
+      // height: calc(100vh - 60px);
       overflow-y: auto;
       justify-content: center;
       .project_inner {
@@ -1183,7 +1194,10 @@ $aboutBG: url("./assets/images/about_background.jpeg");
         .edit_project {
           margin-top: 20px;
           gap: 10px;
-          display: flex;;
+          display: flex;
+          svg {
+            cursor: pointer;
+          }
         }
         .project_info {
           h1 {
@@ -1261,7 +1275,7 @@ $aboutBG: url("./assets/images/about_background.jpeg");
     .profile_container {
       display: flex;
       width: 100vw;
-      height: calc(100vh - 60px);
+      // height: calc(100vh - 60px);
       overflow-y: auto;
       justify-content: center;
       align-items: center;
@@ -1683,7 +1697,6 @@ $aboutBG: url("./assets/images/about_background.jpeg");
               width: 100%;
               height: calc( 100vh - 60px);
               background-color: rgba(0, 0, 0, 0.5);
-              z-index: 10;
               z-index: -10;
               opacity: 0;
             }
@@ -1691,6 +1704,7 @@ $aboutBG: url("./assets/images/about_background.jpeg");
               display: block;
               z-index: 10;
               opacity: 1;
+
             }
             .hamburger {
               width: 30px;

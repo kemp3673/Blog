@@ -4,7 +4,11 @@ import { useLocation } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
+import Loading from "../components/Loading";
+
 const WriteBlog = () => {
+  //TODO Add loading spinner to indicate processing and stop inputs. If update is hit multiple times for example, it will crash server as image it needs to delete is not there. But also there is no visual indication that the website is processing the submission.
+
   // State
   const [isEdit, setIsEdit] = useState(false);
   const [title, setTitle] = useState("");
@@ -12,6 +16,7 @@ const WriteBlog = () => {
   const [text, setText] = useState("");
   const [selectedFiles, setSelectedFile] = useState([]);
   const [imagePreview, setImagePreview] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
 
   // Try and grab id from query string
   const location = useLocation();
@@ -40,6 +45,7 @@ const WriteBlog = () => {
   }, []);
 
   const handleUpdate = async () => {
+    setSubmitting(true);
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", summary);
@@ -56,10 +62,12 @@ const WriteBlog = () => {
       window.location.href = `/blog`;
     } catch (error) {
       console.log(error);
+      setSubmitting(false);
     }
   };
 
   const handlePost = async () => {
+    setSubmitting(true);
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", summary);
@@ -77,6 +85,7 @@ const WriteBlog = () => {
       window.location.href = `/blog`;
     } catch (error) {
       console.log(error);
+      setSubmitting(false);
     }
   };
 
@@ -142,6 +151,7 @@ const WriteBlog = () => {
 
   return (
     <div className="writeblog_container">
+      {submitting && <Loading />}
       <div className="writeblog_inner">
         <div className="writeblog_content">
           <div className="writeblog_Title_Sum">
@@ -223,18 +233,26 @@ const WriteBlog = () => {
                   <button className="write_button" onClick={handleCancel}>
                     Cancel
                   </button>
-                  <button className="write_button" onClick={handleUpdate}>
-                    Update
-                  </button>
+                  {!submitting ? (
+                    <button className="write_button" onClick={handleUpdate}>
+                      Update
+                    </button>
+                  ) : (
+                    <button className="write_button">Updating...</button>
+                  )}
                 </>
               ) : (
                 <>
                   <button className="write_button" onClick={handleCancel}>
                     Cancel
                   </button>
-                  <button className="write_button" onClick={handlePost}>
-                    Post
-                  </button>
+                  {!submitting ? (
+                    <button className="write_button" onClick={handlePost}>
+                      Post
+                    </button>
+                  ) : (
+                    <button className="write_button">Posting...</button>
+                  )}
                 </>
               )}
             </div>
