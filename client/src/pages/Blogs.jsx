@@ -40,10 +40,12 @@ const Blogs = () => {
     switch (blogState[nextIndex]) {
       case undefined:
         loadBlogEntries(newPage);
+        window.scrollTo(0, 0);
         break;
       default:
         setBlogData(blogState.slice(nextIndex, nextIndex + 10));
         setLoading(false);
+        window.scrollTo(0, 0);
         break;
     }
   };
@@ -61,6 +63,9 @@ const Blogs = () => {
       let newPage = currentPage + 1;
       setCurrentPage(newPage);
       changePage(newPage);
+    } else if (typeof direction === "number" && direction !== currentPage) {
+      setCurrentPage(direction);
+      changePage(direction);
     }
   };
 
@@ -129,7 +134,7 @@ const Blogs = () => {
                   (_, index) => (
                     <button
                       key={index}
-                      onClick={() => changePage(index)}
+                      onClick={() => handlePageChange(index)}
                       className={index + 1 === currentPage ? "active" : ""}
                     >
                       {index + 1}

@@ -7,8 +7,6 @@ import "react-quill/dist/quill.snow.css";
 import Loading from "../components/Loading";
 
 const WriteBlog = () => {
-  //TODO Add loading spinner to indicate processing and stop inputs. If update is hit multiple times for example, it will crash server as image it needs to delete is not there. But also there is no visual indication that the website is processing the submission.
-
   // State
   const [isEdit, setIsEdit] = useState(false);
   const [title, setTitle] = useState("");

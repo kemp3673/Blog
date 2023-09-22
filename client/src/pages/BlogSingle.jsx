@@ -46,6 +46,9 @@ const BlogSingle = () => {
     // setHasToken(!!jwt); // TODO uncomment this line
     setHasToken(true); // TODO remove this line
 
+    // Scroll to top
+    window.scrollTo(0, 0);
+
     const blogLink = document.getElementById("blog");
     blogLink.classList.add("active");
     // Remove active class on component unmount
