@@ -1,18 +1,40 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+// Redux
+import { useSelector, useDispatch } from "react-redux";
+import { addBlogEntry, updateCount } from "../state/blogReducer.js";
 
 const BlogMenu = ({ id }) => {
   const [additionalBlogs, setAdditionalBlogs] = useState([]);
+  // REDUX
+  const blogsList = useSelector((state) => state.blog.entries);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    axios
-      .get("/api/blogs") // TODO change to /api/auth/user/${user_id}
-      .then((res) => {
-        setAdditionalBlogs(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // If no blog entries in redux
+    if (blogsList.length === 0) {
+      // Get Count
+      axios
+        .get("/api/blogs/count")
+        .then((res) => {
+          dispatch(updateCount(res.data[0].blog_count));
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+      // Retrieve list
+      axios
+        .get("/api/blogs")
+        .then((res) => {
+          setAdditionalBlogs(res.data);
+          dispatch(addBlogEntry(res.data));
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    } else {
+      setAdditionalBlogs(blogsList.slice(0, 10));
+    }
   }, []);
 
   return (

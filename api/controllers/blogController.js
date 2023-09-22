@@ -7,8 +7,7 @@ const executeQuery = require("../utility/executeQuery.js");
 
 const getBlogs = async (req, res) => {
   const limit = 10; // Set the number of records to fetch per page
-  const offset = 10 * (req.body.page || 0); // Set the offset for the current page
-
+  const offset = 10 * (req.query.page || 0); // Set the offset for the current page
   const query = `
     SELECT * FROM blogs
     ORDER BY id DESC
@@ -24,6 +23,20 @@ const getBlogs = async (req, res) => {
     return res
       .status(500)
       .json({ error: "An error occurred while retrieving blogs" });
+  }
+};
+
+const blogCount = async (req, res) => {
+  const query = `SELECT COUNT(*) AS blog_count FROM blogs`;
+
+  try {
+    const result = await executeQuery(query);
+    return res.status(200).json(result);
+  } catch (error) {
+    console.error("Error getting count:", error.message);
+    return res
+      .status(500)
+      .json({ error: "An error occurred while retrieving blogs count" });
   }
 };
 
@@ -207,6 +220,7 @@ const updateBlog = async (req, res) => {
 
 module.exports = {
   getBlogs,
+  blogCount,
   getSingleBlog,
   createBlog,
   deleteBlog,

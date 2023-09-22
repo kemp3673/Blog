@@ -126,6 +126,11 @@ mysql -u root -p --execute="source schema.sql"
   - Retrieve full blog details by blog id
   - path variable: {"id": number}
 
+### /api/blogs/count
+
+- #### GET
+  - Retrieve count of total blog entries
+
 ### /api/user/:id
 
 - #### GET

@@ -38,6 +38,7 @@ const BlogSingle = () => {
       await getBlog();
     };
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   useEffect(() => {
@@ -78,6 +79,7 @@ const BlogSingle = () => {
   useEffect(() => {
     if (!confirmation) return;
     handleDelete();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [confirmation]);
 
   return (
@@ -139,7 +141,6 @@ const BlogSingle = () => {
                 )}
               </div>
               <h1 className="blog_single_title">{blog.title}</h1>
-              {/* TODO Add error handling if something is wrong with text */}
               <div
                 className="blog_single_text"
                 dangerouslySetInnerHTML={{ __html: blog.content }}

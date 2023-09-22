@@ -6,10 +6,8 @@ const router = express.Router();
 // Import controllers
 const {
   getBlogs,
+  blogCount,
   getSingleBlog,
-  createBlog,
-  deleteBlog,
-  updateBlog,
 } = require("../controllers/blogController.js");
 
 // ROUTER //
@@ -17,6 +15,9 @@ const {
 /**** BLOGS *****/
 // Get all blogs
 router.get("/", getBlogs);
+
+// Get count of total blogs
+router.get("/count", blogCount);
 
 // Get one blog
 router.get("/:id", getSingleBlog);
