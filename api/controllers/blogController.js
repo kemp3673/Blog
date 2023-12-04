@@ -16,7 +16,6 @@ const getBlogs = async (req, res) => {
 
   try {
     const results = await executeQuery(query, [limit, offset]);
-    // Blog entry successfully created
     return res.status(200).json(results);
   } catch (error) {
     console.error("Error getting blogs:", error.message);

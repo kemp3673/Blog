@@ -86,14 +86,14 @@ const Navbar = () => {
             </div>
           </div>
           <div className="navBar_center">
-            <Link to="/about">
-              <h3 id="about">About</h3>
-            </Link>
             <Link to="/blog">
               <h3 id="blog">Blog</h3>
             </Link>
             <Link to="/projects">
               <h3 id="projects">Projects</h3>
+            </Link>
+            <Link to="/about">
+              <h3 id="about">About</h3>
             </Link>
           </div>
           <div className="navBar_right">

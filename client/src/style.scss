@@ -131,29 +131,7 @@ $aboutBG: url("./assets/images/about_background.jpeg");
           .lp_buttons_wrapper {
             display: flex;
             flex-direction: row;
-            // TODO REMOVE BUTTONS AS THEY ARE STYLED IN APP CONTAINER
-            // button {
-            //   display: flex;
-            //   padding: 10px;
-            //   font-size: 1.1rem;
-            //   border: none;
-            //   background-color: $color1;
-            //   align-items: center;
-            //   justify-content: center;
-            //   color: $color5;
-            //   cursor: pointer;
-            //   transition: all 0.2s ease-in-out;
-            //   padding: 10px 20px;
-            //   margin: 10px;
-            // }
-
             a {text-decoration: none;}
-
-            // button:hover {
-            //   background-color: $color5;
-            //   color: $color1;
-            //   box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
-            // }
           }
         }
         .landing_page_right {
@@ -166,6 +144,7 @@ $aboutBG: url("./assets/images/about_background.jpeg");
             max-width: 100%;
             max-height: 100vh;
             object-fit: contain;
+            min-height: 500px;
           }
         }
       }
@@ -519,8 +498,25 @@ $aboutBG: url("./assets/images/about_background.jpeg");
     .blog_single_container {
       display: flex;
       justify-content: center;
-      // height: calc(100vh - 60px);
       overflow-y: auto;
+      a {
+        text-decoration: none;
+        color: $color1;
+        transition: all 0.2s ease-in-out;
+      }
+      a:has(> span):hover {
+        color: $color2;
+      }
+      a:has(> img):hover {
+        opacity: 0.8;
+      }
+      svg {
+        transition: all 0.2s ease-in-out;
+      }
+      svg:hover {
+        opacity: 0.6;
+      }
+
       .confirmation_dialog_container {
         width: 100vw;
         min-width: 280px;
@@ -607,10 +603,12 @@ $aboutBG: url("./assets/images/about_background.jpeg");
             display: flex;
             flex-direction: column;
             justify-content: center;
+            color: $color1;
+
             .blog_author_name {
               font-size: 14px;
               font-weight: bold;
-              color: $color1;
+              color: inherit;
             }
             .blog_date_posted {
               font-size: 14px;
@@ -620,6 +618,7 @@ $aboutBG: url("./assets/images/about_background.jpeg");
           .edit_blog {
             display: flex;
             gap: 5px;
+            align-items: center;
             .edit_icon {
               text-decoration: none;
               cursor: pointer;

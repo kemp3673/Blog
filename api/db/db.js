@@ -3,7 +3,7 @@ const mysql = require("mysql");
 
 // Load env variables
 const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT } = process.env;
-
+// TODO Create a second connection to a different user account that only has read access to help secure db from non-validated queries.
 const db = mysql.createPool({
   host: DB_HOST,
   user: DB_USER,

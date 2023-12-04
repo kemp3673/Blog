@@ -8,7 +8,7 @@ import ConfirmationDialog from "../components/ConfirmationDialog";
 import Loading from "../components/Loading";
 // Icons
 import { IconContext } from "react-icons";
-import { AiFillEdit, AiFillDelete } from "react-icons/ai";
+import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 
 const BlogSingle = () => {
   const [blog, setBlog] = useState(null);
@@ -106,13 +106,17 @@ const BlogSingle = () => {
             <div className="blog_single_content">
               <img src={`/uploads/${blog.main_image}`} alt={blog.title} />
               <div className="blog_author">
-                <img
-                  className="blog_author_image"
-                  src={blog.author_img}
-                  alt={blog.author_name}
-                />
+                <a href="/about">
+                  <img
+                    className="blog_author_image"
+                    src={blog.author_img}
+                    alt={blog.author_name}
+                  />
+                </a>
                 <div className="blog_info">
-                  <span className="blog_author_name">{blog.author_name}</span>
+                  <a href="/about">
+                    <span className="blog_author_name">{blog.author_name}</span>
+                  </a>
                   <span className="blog_date_posted">
                     Posted {convertDate(blog.created_at)}
                   </span>
@@ -127,7 +131,7 @@ const BlogSingle = () => {
                           size: 30,
                         }}
                       >
-                        <AiFillEdit />
+                        <AiOutlineEdit />
                       </IconContext.Provider>
                     </Link>
                     <IconContext.Provider
@@ -138,7 +142,7 @@ const BlogSingle = () => {
                       }}
                       onClick={handleDeleteConfirm}
                     >
-                      <AiFillDelete onClick={handleDeleteConfirm} />
+                      <AiOutlineDelete onClick={handleDeleteConfirm} />
                     </IconContext.Provider>
                   </div>
                 )}

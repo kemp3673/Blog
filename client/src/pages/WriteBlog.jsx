@@ -101,7 +101,11 @@ const WriteBlog = () => {
   };
 
   const handleCancel = () => {
-    window.location.href = "/blog";
+    if (blogId) {
+      window.location.href = `/blog/${blogId}`;
+    } else {
+      window.location.href = "/blog";
+    }
   };
 
   /*

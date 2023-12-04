@@ -45,7 +45,7 @@ const LandingPage = () => {
               <button className="lp_button_1" onClick={getResume}>
                 Download Resume
               </button>
-              <Link to="/about">
+              <Link to="/blog">
                 <button className="lp_button_2">
                   Learn More&nbsp;
                   <FaArrowRight />{" "}

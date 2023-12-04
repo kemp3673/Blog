@@ -17,10 +17,11 @@ const resumeRoutes = require("./routes/resumeRoutes");
 const PORT = process.env.PORT || 8000;
 
 // ***** MIDDLWARE *****
+// Allow only GET requests for all routes
 app.use(
   cors({
     origin: "*",
-    methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
+    methods: ["GET"],
   })
 );
 
@@ -34,9 +35,6 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ error: "Something went wrong!" });
 });
-
-// Tell express to use cors
-app.use(cors());
 
 // Tell express to use json
 app.use(express.json());
@@ -55,6 +53,8 @@ app.use("/uploads/:image", express.static("uploads"));
 // Add middleware to verify web tokens
 // app.use(authenticateJWT);
 // *****  PROTECTED ROUTES *****
+// Enable preflight cors settings for all routes when on protected route
+app.options("/api/auth", cors({ origin: "https://yourfrontenddomain.com" }));
 app.use("/api/auth", authRoutes);
 
 // Catch all for any other routes that are not defined above and send index.html
